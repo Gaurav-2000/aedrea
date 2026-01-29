@@ -207,7 +207,7 @@ section {
   }
 
   .cta-button {
-    @apply px-4 py-4 rounded-lg bg-black-200 flex justify-center items-center relative cursor-pointer overflow-hidden;
+    @apply px-4 py-4 rounded-2xl bg-black-200 flex justify-center items-center relative cursor-pointer overflow-hidden;
 
     .bg-circle {
       @apply absolute -right-10 origin-center top-1/2 -translate-y-1/2 
@@ -216,7 +216,7 @@ section {
     }
 
     .text {
-      @apply uppercase md:text-lg text-black transition-all duration-500
+      @apply uppercase md:text-lg  text-black transition-all duration-500
         group-hover:text-white-50 group-hover:-translate-x-5 xl:translate-x-0 -translate-x-5;
     }
 

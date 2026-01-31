@@ -1,6 +1,7 @@
 import React from "react";
 import { words } from "../constants";
 import Button from "../components/Button";
+import HeroExperiance from "../components/HeroModels/HeroExperiance";
 
 const Hero = () => {
   return (
@@ -17,9 +18,9 @@ const Hero = () => {
                 Shaping
                 <span className="slide">
                   <span className="wrapper">
-                    {words.map((word) => (
+                    {words.map((word, index) => (
                       <span
-                        key={word.text}
+                        key={index}
                         className="flex items-center md:gap-2 gap-1 pb-2"
                       >
                         <img
@@ -48,7 +49,13 @@ const Hero = () => {
             />
           </div>
         </header>
+
         {/* right 3d model */}
+        <figure>
+          <div className="hero-3d-layout">
+            <HeroExperiance />
+          </div>
+        </figure>
       </div>
     </section>
   );

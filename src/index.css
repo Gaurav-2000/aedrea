@@ -407,7 +407,7 @@ section {
   height: 100%;
   position: absolute;
   overflow: hidden;
-  animation: marquee 60s linear infinite;
+  animation: marquee 40s linear infinite;
 }
 .marquee-item {
   float: left;

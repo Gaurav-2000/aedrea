@@ -44,8 +44,8 @@ const TechStack = () => {
     <div id="skills" className="flex-center section-padding">
       <div className="w-full h-full md:px-10 px-5">
         <TitleHeader
-          title="How I Can Contribute & My Key Skills"
-          sub="🤝 What I Bring to the Table"
+          title="Our Capabilities & Core Expertise"
+          sub="🤝 What we Bring to the Table"
         />
         <div className="tech-grid">
           {/* Loop through the techStackIcons array and create a component for each item. 
@@ -70,7 +70,7 @@ const TechStack = () => {
                     text and make it take up the full width of the component. */}
                 <div className="padding-x w-full">
                   {/* The p tag contains the name of the tech stack icon. */}
-                  <p>{icon.name}</p>
+                  <p className="md:text-xl md:mb-8">{icon.name}</p>
                 </div>
               </div>
             </div>

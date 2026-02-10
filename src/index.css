@@ -250,7 +250,7 @@ section {
   }
 
   .timeline-logo {
-    @apply md:size-20 size-10 flex-none rounded-full flex justify-center items-center md:-translate-y-7 border border-black-50 bg-black-100;
+    @apply size-10  md:size-12  flex-none rounded-full flex justify-center items-center md:-translate-y-7 border border-black-50 bg-black-100;
   }
 
   .exp-card-wrapper {
@@ -266,7 +266,7 @@ section {
   }
 
   .tech-card-content {
-    @apply flex flex-col md:justify-center items-center xl:gap-5 xl:h-[50vh] overflow-hidden relative z-10 group-hover:cursor-grab;
+    @apply flex flex-col md:justify-center items-center xl:gap-5 xl:h-[60vh] overflow-hidden relative z-10 group-hover:cursor-grab;
 
     & p {
       @apply text-lg 2xl:text-2xl pb-5 xl:pb-0 font-semibold text-white-50 text-center;
@@ -368,7 +368,7 @@ section {
 /* Hero Text slider ends */
 
 .gradient-line {
-  width: 2px;
+  /* width: 2px; */
   background: linear-gradient(
     0deg,
     rgba(69, 222, 196, 0) 0%,

@@ -37,7 +37,7 @@ const Hero = () => {
               <h1>
                 Shaping
                 <span className="slide">
-                  <span className="wrapper">
+                  <span className="wrapper ">
                     {words.map((word, index) => (
                       <span
                         key={index}

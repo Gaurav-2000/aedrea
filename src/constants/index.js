@@ -114,31 +114,31 @@ const techStackImgs = [
 
 const techStackIcons = [
   {
-    name: "React Developer",
+    name: "Frontend Development",
     modelPath: "/models/react_logo-transformed.glb",
     scale: 1,
     rotation: [0, 0, 0],
   },
   {
-    name: "Python Developer",
+    name: "Backend & API Development",
     modelPath: "/models/python-transformed.glb",
     scale: 0.8,
     rotation: [0, 0, 0],
   },
   {
-    name: "Backend Developer",
+    name: "Scalable System Architecture",
     modelPath: "/models/node-transformed.glb",
     scale: 5,
     rotation: [0, -Math.PI / 2, 0],
   },
   {
-    name: "Interactive Developer",
+    name: "Interactive & Animated Experiences",
     modelPath: "/models/three.js-transformed.glb",
     scale: 0.05,
     rotation: [0, 0, 0],
   },
   {
-    name: "Project Manager",
+    name: "Project Planning & Delivery",
     modelPath: "/models/git-svg-transformed.glb",
     scale: 0.05,
     rotation: [0, -Math.PI / 4, 0],
@@ -147,10 +147,14 @@ const techStackIcons = [
 
 const expCards = [
   {
-    review:
-      "1. We focus on clarity, performance, and usability — not unnecessary complexity.2. Every project is built with real users and real business goals in mind. 3. We work closely with clients to deliver clean, scalable, and maintainable solutions. ",
-    imgPath: "/images/exp1.png",
-    logoPath: "/images/logo1.png",
+    reviewTitle: "Why Work With Us",
+    review: [
+      "1. We focus on clarity, performance, and usability — not unnecessary complexity.",
+      "2. Every project is built with real users and real business goals in mind.",
+      "3. We work closely with clients to deliver clean, scalable, and maintainable solutions.",
+    ],
+    // imgPath: "/images/exp1.png",
+    logoPath: "/images/logos/programming.png",
     title: "Web Design & Development Services",
     date: "Custom Websites • Modern UI • Performance-Focused Builds",
     responsibilities: [
@@ -162,10 +166,14 @@ const expCards = [
     ],
   },
   {
-    review:
-      "Adrian’s contributions to Docker's web applications have been outstanding. He approaches challenges with a problem-solving mindset.",
-    imgPath: "/images/exp2.png",
-    logoPath: "/images/logo2.png",
+    reviewTitle: "Our Approach",
+    review: [
+      "1. Understand your business, audience, and goals before writing a single line of code.",
+      "2. Design with purpose — every element has a reason.",
+      "3. Build fast, reliable websites that are easy to scale and maintain.",
+    ],
+    // imgPath: "/images/exp2.png",
+    logoPath: "/images/logos/social-media.png",
     title: "Social Media Management",
     date: "Building presence, not just posting",
     responsibilities: [
@@ -175,10 +183,14 @@ const expCards = [
     ],
   },
   {
-    review:
-      "Adrian’s work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
-    imgPath: "/images/exp3.png",
-    logoPath: "/images/logo3.png",
+    reviewTitle: "What You Can Expect",
+    review: [
+      "1. Clear communication and transparent workflow.",
+      "2. Modern design paired with solid technical execution.",
+      "3. Solutions that balance aesthetics, performance, and usability.",
+    ],
+    // imgPath: "/images/exp3.png",
+    logoPath: "/images/logos/performance.png",
     title: "Basic SEO Services",
     date: "Helping your website get found",
     responsibilities: [

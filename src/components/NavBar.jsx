@@ -24,7 +24,14 @@ const NavBar = () => {
     <header className={`navbar ${scrolled ? "scrolled" : "not-scrolled"}`}>
       <div className="inner">
         <a href="#hero" className="logo">
-          AEDREA
+          <div className="logo-wrapper flex flex-row">
+            <img
+              className="aedrea-logo  w-15 "
+              src="/images/logos/AEDREA logo white 2.svg"
+              alt=""
+            />
+            <p className="mt-4 ml-1">AEDREA</p>
+          </div>
         </a>
 
         <nav className="desktop">

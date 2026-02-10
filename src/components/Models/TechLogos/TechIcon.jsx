@@ -48,7 +48,7 @@ const TechIcon = ({ model }) => {
         THREE.Group object contains all the objects (meshes, lights, etc)
         that make up the 3D model.
       */}
-      <Float speed={10} rotationIntensity={0.5} floatIntensity={2}>
+      <Float speed={10} rotationIntensity={0.2} floatIntensity={1.5}>
         <group scale={model.scale} rotation={model.rotation}>
           <primitive object={scene.scene} />
         </group>

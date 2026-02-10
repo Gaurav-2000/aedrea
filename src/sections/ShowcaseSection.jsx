@@ -37,6 +37,7 @@ const ShowcaseSection = () => {
           delay: 0.3 * (index + 1),
           scrollTrigger: {
             trigger: card,
+            scrub: true,
             start: "top bottom-=100",
           },
         },
@@ -51,15 +52,12 @@ const ShowcaseSection = () => {
           {/* left */}
           <div ref={project1Ref} className="first-project-wrapper">
             <div className="image-wrapper">
-              <img src="/images/project1.png" alt="" />
+              <img src="/images/Project 5.png" alt="" />
             </div>
             <div className="text-content">
-              <h2>
-                On_Demant Rides Made Simple with a Powerfull, User-friendlly App
-                Called Ryde
-              </h2>
+              <h2>Learn to surf the fun way with the SurfTwins</h2>
               <p className="text-white-50 md:text-xl">
-                An app built with React Native, Expo, & TailwindCSS for a fast,
+                An app built with Webflow, Expo, & TailwindCSS for a fast,
                 user-friendly experience.
               </p>
             </div>
@@ -69,15 +67,18 @@ const ShowcaseSection = () => {
           <div className="project-list-wrapper overflow-hidden">
             <div ref={project2Ref} className="project">
               <div className="image-wrapper bg-[#ffefdb]">
-                <img src="/images/project2.png" alt="" />
+                <img src="/images/project 6.png" alt="" />
               </div>
-              <h2>Library Management Platform</h2>
+              <h2>
+                PEOPLE VS COFFEE a Platform for connecting people while enjoying
+                coffee.
+              </h2>
             </div>
             <div ref={project3Ref} className="project">
               <div className="image-wrapper bg-[#f1c3a6]">
-                <img src="/images/project3.png" alt="" />
+                <img src="/images/project 7.png" alt="" />
               </div>
-              <h2>Start-Up Showcase App</h2>
+              <h2>A Movies Searching App. </h2>
             </div>
           </div>
         </div>

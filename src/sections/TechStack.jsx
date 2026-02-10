@@ -20,7 +20,7 @@ const TechStack = () => {
         // Initial values
         y: 50, // Move the cards down by 50px
         opacity: 0, // Set the opacity to 0
-        yoyo: true,
+        // yoyo: true,
       },
       {
         // Final values
@@ -28,11 +28,13 @@ const TechStack = () => {
         opacity: 1, // Set the opacity to 1
         duration: 1, // Duration of the animation
         ease: "power2.inOut", // Ease of the animation
-        stagger: 0.2, // Stagger the animation by 0.2 second
-        yoyo: true,
+        stagger: 0.3, // Stagger the animation by 0.2 second
+        // yoyo: true,
         scrollTrigger: {
+          // scrub: true,
           trigger: "#skills", // Trigger the animation when the user scrolls to the #skills wrapper
-          start: "top center", // Start the animation when the top of the wrapper is at the center of the screen
+          start: "top bottom", // Start the animation when the top of the wrapper is at the center of the screen
+          // end: "bottom bottom"
         },
       },
     );

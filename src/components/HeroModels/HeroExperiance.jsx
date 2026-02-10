@@ -10,12 +10,12 @@ const HeroExperiance = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
   return (
-    <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
+    <Canvas frameloop="demand" camera={{ position: [0, 0, 15], fov: 45 }}>
       <HeroLights />
-      <Particles count={200} />
+      {/* <Particles /> */}
       <OrbitControls
         enablePan={false} // Prevents panning of the scene
-        enableZoom={!isTablet} // Disables zoom on tablets
+        enableZoom={false} // Disables zoom on tablets
         maxDistance={20} // Maximum distance for zooming out
         minDistance={10} // Minimum distance for zooming in
         minPolarAngle={Math.PI / 10} // Minimum angle for vertical rotation

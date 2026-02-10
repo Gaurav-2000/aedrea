@@ -29,6 +29,7 @@ const ExperienceSection = () => {
         // Trigger the animation when the card is 80% of the way down the screen
         scrollTrigger: {
           // The card is the trigger element
+          // scrub: true,
           trigger: card,
           // Trigger the animation when the card is 80% down the screen
           start: "top 80%",
@@ -49,6 +50,7 @@ const ExperienceSection = () => {
       // and end it when the timeline is at 70% down the screen
       scrollTrigger: {
         trigger: ".timeline",
+        // scrub: true,
         start: "top center",
         end: "70% center",
         // Update the animation as the user scrolls
@@ -81,6 +83,7 @@ const ExperienceSection = () => {
         // Trigger the animation when the text is 60% down the screen
         scrollTrigger: {
           // The text is the trigger element
+          // scrub: true,
           trigger: text,
           // Trigger the animation when the text is 60% down the screen
           start: "top 60%",
@@ -125,9 +128,7 @@ const ExperienceSection = () => {
                         <p className="my-5 text-white-50">
                           🗓️&nbsp;{card.date}
                         </p>
-                        <p className="text-[#839CB5] italic">
-                          Responsibilities
-                        </p>
+                        <p className="text-[#839CB5] italic">What I Offer</p>
                         <ul className="list-disc ms-5 mt-5 flex flex-col gap-5 text-white-50">
                           {card.responsibilities.map(
                             (responsibility, index) => (

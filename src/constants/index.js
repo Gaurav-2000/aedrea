@@ -29,9 +29,9 @@ const words = [
 ];
 
 const counterItems = [
-  { value: 15, suffix: "+", label: "Years of Experience" },
-  { value: 200, suffix: "+", label: "Satisfied Clients" },
-  { value: 108, suffix: "+", label: "Completed Projects" },
+  { value: 1, suffix: "+", label: "Years of Experience" },
+  { value: 14, suffix: "+", label: "Satisfied Clients" },
+  { value: 22, suffix: "+", label: "Completed Projects" },
   { value: 90, suffix: "%", label: "Client Retention Rate" },
 ];
 
@@ -148,15 +148,17 @@ const techStackIcons = [
 const expCards = [
   {
     review:
-      "Adrian brought creativity and technical expertise to the team, significantly improving our frontend performance. His work has been invaluable in delivering faster experiences.",
+      "1. We focus on clarity, performance, and usability — not unnecessary complexity.2. Every project is built with real users and real business goals in mind. 3. We work closely with clients to deliver clean, scalable, and maintainable solutions. ",
     imgPath: "/images/exp1.png",
     logoPath: "/images/logo1.png",
-    title: "Frontend Developer",
-    date: "January 2023 - Present",
+    title: "Web Design & Development Services",
+    date: "Custom Websites • Modern UI • Performance-Focused Builds",
     responsibilities: [
-      "Developed and maintained user-facing features for the Hostinger website.",
-      "Collaborated closely with UI/UX designers to ensure seamless user experiences.",
-      "Optimized web applications for maximum speed and scalability.",
+      "Design and develop custom websites tailored to your brand, goals, and audience.",
+      "Build modern, responsive UIs that look sharp on mobile, tablet, and desktop.",
+      "Develop websites using React, modern JavaScript, and animation tools for engaging user experiences",
+      // "Performance optimization for better load times and smoother interactions.",
+      // "Clear communication, transparent workflow, and on-time delivery.",
     ],
   },
   {
@@ -164,12 +166,12 @@ const expCards = [
       "Adrian’s contributions to Docker's web applications have been outstanding. He approaches challenges with a problem-solving mindset.",
     imgPath: "/images/exp2.png",
     logoPath: "/images/logo2.png",
-    title: "Full Stack Developer",
-    date: "June 2020 - December 2023",
+    title: "Social Media Management",
+    date: "Building presence, not just posting",
     responsibilities: [
-      "Led the development of Docker's web applications, focusing on scalability.",
-      "Worked with backend engineers to integrate APIs seamlessly with the frontend.",
-      "Contributed to open-source projects that were used with the Docker ecosystem.",
+      "Create and manage consistent, on-brand content that reflects your business voice.",
+      "Plan and schedule posts to maintain regular engagement across platforms.",
+      "Monitor performance and refine content to grow reach and audience trust.",
     ],
   },
   {
@@ -177,12 +179,12 @@ const expCards = [
       "Adrian’s work on Appwrite’s mobile app brought a high level of quality and efficiency. He delivered solutions that enhanced our mobile experience & meet our product goals.",
     imgPath: "/images/exp3.png",
     logoPath: "/images/logo3.png",
-    title: "React Native Developer",
-    date: "March 2019 - May 2020",
+    title: "Basic SEO Services",
+    date: "Helping your website get found",
     responsibilities: [
-      "Built cross-platform mobile apps using React Native, integrating with Appwrite's backend services.",
-      "Improved app performance and user experience through code optimization and testing.",
-      "Coordinated with the product team to implement features based on feedback.",
+      "Optimize website structure, content, and metadata for search engine visibility.",
+      "Improve page speed, mobile usability, and SEO fundamentals for better rankings.",
+      "Set up essential SEO tools and best practices for long-term organic growth.",
     ],
   },
 ];

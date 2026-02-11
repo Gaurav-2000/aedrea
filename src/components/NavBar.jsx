@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { navLinks } from "../constants";
+import logo from "../../public/images/logos/AEDREALogoWhite2.svg";
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -25,12 +26,8 @@ const NavBar = () => {
       <div className="inner">
         <a href="#hero" className="logo">
           <div className="logo-wrapper flex flex-row">
-            <img
-              className="aedrea-logo  w-15 "
-              src="/images/logos/AEDREA logo white 2.svg"
-              alt=""
-            />
-            <p className="mt-4 ml-1">AEDREA</p>
+            <img className="aedrea-logo  w-10 md:w-15 " src={logo} alt="" />
+            <p className="mt-2 md:mt-4 ml-1">AEDREA</p>
           </div>
         </a>
 

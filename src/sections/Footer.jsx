@@ -1,11 +1,14 @@
 import { socialImgs } from "../constants";
+import logo from "../../public/images/logos/AEDREALogoWhite2.svg";
+import logo2 from "../../public/images/logos/WordmarkLogoWhite.svg";
 
 const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        <div className="flex flex-col justify-center">
-          <p>Terms & Conditions</p>
+        <div className="flex flex-row justify-center">
+          {/* <img src={logo2} alt="" className="md:w-4xl my-[-10] " /> */}
+          <p className=" text-7xl font-bold md:-ml-30">AEDREA</p>
         </div>
         <div className="socials">
           {socialImgs.map((socialImg, index) => (

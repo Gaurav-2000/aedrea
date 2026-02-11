@@ -59,8 +59,9 @@ const Hero = () => {
               <h1> That deliever Results </h1>
             </div>
             <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
-              We, are Aedrea , a dubai base Web designer and developer digital
-              studio
+              Aedrea is an independent design studio focused on building modern,
+              <br />
+              performance-driven websites.
             </p>
             <Button
               className="md:w-80  md:h-16 w-60 h-12"

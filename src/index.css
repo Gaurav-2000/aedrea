@@ -28,6 +28,36 @@ section {
   --color-blue-50: #839cb5;
   --color-blue-100: #2d2d38;
 }
+.Horizontal {
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.Horizontal__text {
+  display: flex;
+  width: max-content;
+  white-space: nowrap;
+  gap: 4vw;
+  padding-left: 100vw;
+}
+
+.heading-xl {
+  font-size: clamp(2rem, 10vw, 12rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+.spanTextOrange {
+  color: orange;
+  font-style: italic;
+  font-weight: 400;
+}
+.spanTextBlue {
+  color: rgb(0, 106, 164);
+  font-style: italic;
+  font-weight: 400;
+}
 
 @layer utilities {
   .flex-center {

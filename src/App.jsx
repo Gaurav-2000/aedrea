@@ -9,6 +9,7 @@ import TechStack from "./sections/TechStack";
 import Testimonials from "./sections/Testimonials";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
+import ScrollText from "./sections/ScrollText";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <ExperienceSection />
       <TechStack />
       {/* <Testimonials /> */}
+      <ScrollText />
       <Contact />
       <Footer />
     </>

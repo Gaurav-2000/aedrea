@@ -21,13 +21,14 @@ section {
 
 @theme {
   --font-sans: "Mona Sans", sans-serif;
-  --color-white-50: #d9ecff;
+  --color-white-50: #ffffff;
   --color-black-50: #1c1c21;
   --color-black-100: #0e0e10;
-  --color-black-200: #282732;
+  --color-black-200: #38383b;
   --color-blue-50: #839cb5;
   --color-blue-100: #2d2d38;
 }
+
 .Horizontal {
   overflow: hidden;
   height: 100vh;
@@ -166,7 +167,7 @@ section {
   }
 
   .hero-3d-layout {
-    @apply xl:w-[70%] w-full h-full min-h-[50vh] absolute xl:-top-20 top-24 xl:-right-20 right-0;
+    @apply xl:w-[60%] w-full h-full min-h-[50vh] absolute xl:-top-20 top-24 xl:-right-20 right-0;
   }
 
   .navbar {

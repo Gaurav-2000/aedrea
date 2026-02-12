@@ -1,0 +1,15 @@
+.scroll-section {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2%;
+  margin-top: 2rem;
+  margin-bottom: -3rem;
+}
+
+.scroll-text {
+  font-size: clamp(32px, 5vw, 64px);
+  font-family: syne, sans-serif;
+  line-height: 1.2;
+}

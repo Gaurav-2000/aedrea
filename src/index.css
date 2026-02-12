@@ -58,6 +58,43 @@ section {
   font-style: italic;
   font-weight: 400;
 }
+.scroll-section {
+  min-height: 80vh; /* must be tall for scroll */
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  padding: 0 2%;
+}
+
+.scroll-text {
+  font-size: clamp(32px, 5vw, 64px);
+  font-family: syne;
+  line-height: 1.2;
+  color: #999; /* fallback */
+}
+
+.scroll-text span {
+  color: #b5b5b5; /* DEFAULT GRAY */
+  opacity: 0.7;
+  transition:
+    color 0.25s linear,
+    opacity 0.25s ease;
+  display: inline-block;
+}
+
+.scroll-text span.active {
+  color: #000000; /* BLACK during scroll */
+  opacity: 1;
+}
+
+.scroll-text span {
+  transform: translateY(12px);
+}
+
+.scroll-text span.active {
+  transform: translateY(0);
+}
 
 @layer utilities {
   .flex-center {

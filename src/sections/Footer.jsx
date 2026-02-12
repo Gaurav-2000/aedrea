@@ -11,8 +11,8 @@ const Footer = () => {
           <p className=" text-7xl font-bold md:-ml-30">AEDREA</p>
         </div>
         <div className="socials">
-          {socialImgs.map((socialImg, index, url) => (
-            <a href={url} key={index} className="icon">
+          {socialImgs.map((socialImg, index) => (
+            <a href={socialImg.url} key={index} className="icon">
               <img src={socialImg.imgPath} alt="social icon" />
             </a>
           ))}

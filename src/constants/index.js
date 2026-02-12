@@ -279,7 +279,7 @@ const socialImgs = [
   },
   {
     name: "Whatsapp",
-    imgPath: "/images/whatsapp.png",
+    imgPath: "/images/whatsapp2.png",
     url: "https://wa.me/917289873340",
   },
 ];

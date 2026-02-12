@@ -1,6 +1,6 @@
 import { socialImgs } from "../constants";
-import logo from "../../public/images/logos/AEDREALogoWhite2.svg";
-import logo2 from "../../public/images/logos/WordmarkLogoWhite.svg";
+// import logo from "/images/logos/AEDREALogoWhite2.svg";
+// import logo2 from "../../public/images/logos/WordmarkLogoWhite.svg";
 
 const Footer = () => {
   return (

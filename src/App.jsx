@@ -10,10 +10,25 @@ import Testimonials from "./sections/Testimonials";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import ScrollText from "./sections/ScrollText";
+import gsap from "gsap";
+import { ReactLenis } from "lenis/react";
+import { useEffect, useRef } from "react";
 
 const App = () => {
+  const lenisRef = useRef();
+
+  useEffect(() => {
+    function update(time) {
+      lenisRef.current?.lenis?.raf(time * 1000);
+    }
+
+    gsap.ticker.add(update);
+
+    return () => gsap.ticker.remove(update);
+  }, []);
   return (
     <>
+      <ReactLenis root options={{ autoRaf: false }} ref={lenisRef} />
       <NavBar />
       <Hero />
       <ShowcaseSection />

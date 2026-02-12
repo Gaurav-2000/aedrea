@@ -27,7 +27,7 @@ const ShowcaseSection = () => {
       gsap.fromTo(
         card,
         {
-          y: 50,
+          y: 30,
           opacity: 0,
         },
         {
@@ -38,7 +38,7 @@ const ShowcaseSection = () => {
           scrollTrigger: {
             trigger: card,
             scrub: true,
-            start: "top bottom-=100",
+            start: "top bottom-=80",
           },
         },
       );
@@ -47,7 +47,7 @@ const ShowcaseSection = () => {
 
   return (
     <section ref={sectionRef} id="work" className="app-showcase">
-      <div className="w-full">
+      <div className="w-full h-full">
         <div className="showcaselayout">
           {/* left */}
           <div ref={project1Ref} className="first-project-wrapper">

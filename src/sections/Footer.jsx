@@ -11,10 +11,10 @@ const Footer = () => {
           <p className=" text-7xl font-bold md:-ml-30">AEDREA</p>
         </div>
         <div className="socials">
-          {socialImgs.map((socialImg, index) => (
-            <div key={index} className="icon">
+          {socialImgs.map((socialImg, index, url) => (
+            <a href={url} key={index} className="icon">
               <img src={socialImg.imgPath} alt="social icon" />
-            </div>
+            </a>
           ))}
         </div>
         <div className="flex flex-col justify-center">

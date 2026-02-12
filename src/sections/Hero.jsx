@@ -66,7 +66,7 @@ const Hero = () => {
             <Button
               className="md:w-80  md:h-16 w-60 h-12"
               id="work"
-              text="Click to Scroll"
+              text="Click Me.. "
             />
           </div>
         </header>

@@ -58,12 +58,12 @@ const Hero = () => {
                 We build digital experiences
                 <span className="block font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
                   that
-                  <span className="slide">
+                  <span className="slide ">
                     <span className="wrapper ">
                       {words.map((word, index) => (
                         <span
                           key={index}
-                          className="spanTextOrange flex items-center md:gap-2 gap-1"
+                          className=" text-orange-400  font-light  flex items-center md:gap-2 gap-1 "
                         >
                           <img
                             src={word.imgPath}
@@ -81,10 +81,10 @@ const Hero = () => {
               {/* <h1>Into real projects </h1>
               <h1> That deliever Results </h1> */}
             </div>
-            <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
-              Aedrea is an independent design studio focused on building modern,
-              <br />
-              performance-driven websites.
+            <p className="text-white-50 italic md:text-xl relative z-10 pointer-events-none">
+              A focused design studio crafting fast, scalable, and
+              performance-driven <br />
+              digital experiences.
             </p>
             <Button
               className="md:w-80  md:h-16 w-60 h-12"

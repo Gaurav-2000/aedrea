@@ -34,7 +34,7 @@ const Hero = () => {
         <header className="flex flex-col justify-center md:w-full w-screen md:px-20 px-5">
           <div className="flex flex-col gap-7">
             <div className="hero-text">
-              <h1>
+              {/* <h1>
                 Shaping
                 <span className="slide">
                   <span className="wrapper ">
@@ -53,10 +53,33 @@ const Hero = () => {
                     ))}
                   </span>
                 </span>
+              </h1> */}
+              <h1 className="font-semibold leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+                We build digital experiences
+                <span className="block font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+                  that
+                  <span className="slide">
+                    <span className="wrapper ">
+                      {words.map((word, index) => (
+                        <span
+                          key={index}
+                          className="spanTextOrange flex items-center md:gap-2 gap-1"
+                        >
+                          <img
+                            src={word.imgPath}
+                            alt="image text"
+                            className="xl:size-12 md:size-10 size-7 md:p-2 p-1 rounded-full bg-white-50"
+                          />
+                          <span>{word.text}</span>
+                        </span>
+                      ))}
+                    </span>
+                  </span>
+                </span>
               </h1>
 
-              <h1>Into real projects </h1>
-              <h1> That deliever Results </h1>
+              {/* <h1>Into real projects </h1>
+              <h1> That deliever Results </h1> */}
             </div>
             <p className="text-white-50 md:text-xl relative z-10 pointer-events-none">
               Aedrea is an independent design studio focused on building modern,

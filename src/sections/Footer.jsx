@@ -43,23 +43,15 @@ const Footer = () => {
         </div>
 
         {/* Contact Info */}
-        <div className="mt-6 flex flex-col items-center gap-3 text-sm md:flex-row md:justify-center md:gap-8">
+        <div className="mt-6 flex flex-col items-center gap-3  md:flex-row md:justify-center md:gap-8">
           {/* WhatsApp */}
-          <a
-            href="https://wa.me/9172899873340"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:opacity-80 transition-opacity"
-          >
-            📱 WhatsApp: +91 7289873340
-          </a>
 
           {/* Email */}
           <a
-            href="mailto:aedrea.studio@gmail.com"
+            href="mailto:support@aedrea.com"
             className="hover:opacity-80 transition-opacity"
           >
-            ✉️aedrea.studio@gmail.com
+            ✉️support@aedrea.com
           </a>
         </div>
 
@@ -79,7 +71,7 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-6 text-center">
+        <div className="mt-6 text-center ">
           <p className="text-sm opacity-80">
             © {new Date().getFullYear()} Aedrea Studio. All rights reserved.
           </p>

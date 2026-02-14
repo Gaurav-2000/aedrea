@@ -267,11 +267,7 @@ const socialImgs = [
     imgPath: "/images/insta.png",
     url: "https://www.instagram.com/aedrea.studio/",
   },
-  {
-    name: "x",
-    imgPath: "/images/x.png",
-    url: "https://www.instagram.com/aedrea.studio/",
-  },
+
   {
     name: "linkedin",
     imgPath: "/images/linkedin.png",

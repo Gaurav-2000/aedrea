@@ -7,7 +7,7 @@ const TitleHeader = ({ title, sub }) => {
         <p>{sub}</p>
       </div>
       <div>
-        <h1 className=" md:text-7xl text-3xl text-center">{title}</h1>
+        <h4 className=" md:text-7xl text-3xl text-center">{title}</h4>
       </div>
     </div>
   );

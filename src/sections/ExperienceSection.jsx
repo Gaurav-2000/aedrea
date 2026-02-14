@@ -128,7 +128,7 @@ const ExperienceSection = () => {
                         <img src={card.logoPath} alt="logo" />
                       </div>
                       <div>
-                        <h1 className="font-semibold text-3xl">{card.title}</h1>
+                        <h4 className="font-semibold text-3xl">{card.title}</h4>
                         <p className="my-5 text-white-50">
                           🗓️&nbsp;{card.date}
                         </p>

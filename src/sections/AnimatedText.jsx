@@ -46,9 +46,9 @@ const ScrollText = () => {
 
   return (
     <section ref={sectionRef} className="scroll-section">
-      <h1 ref={textRef} className="scroll-text">
+      <h2 ref={textRef} className="scroll-text">
         {TEXT}
-      </h1>
+      </h2>
     </section>
   );
 };

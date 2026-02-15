@@ -1,20 +1,20 @@
 const navLinks = [
   {
-    name: "Work",
+    name: "Projects",
     link: "#work",
   },
   {
-    name: "Experience",
+    name: "Services",
     link: "#experience",
   },
   {
-    name: "Skills",
+    name: "Tools",
     link: "#skills",
   },
-  {
-    name: "Testimonials",
-    link: "#testimonials",
-  },
+  // {
+  //   name: "Testimonials",
+  //   link: "#testimonials",
+  // },
 ];
 
 const words = [

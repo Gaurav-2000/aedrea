@@ -66,6 +66,8 @@ import TechStack from "./sections/TechStack";
 import ScrollText from "./sections/ScrollText";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
+import AboutUs from "./sections/AboutUs";
+import AnimatedCounter from "./components/AnimatedCounter";
 
 const App = () => {
   const [appReady, setAppReady] = useState(false);
@@ -103,6 +105,8 @@ const App = () => {
           <>
             <NavBar />
             <Hero />
+            {/* <AboutUs /> */}
+            <AnimatedCounter />
             <AnimatedText />
             <ShowcaseSection />
             <LogoSection />

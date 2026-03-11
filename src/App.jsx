@@ -68,6 +68,7 @@ import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import AboutUs from "./sections/AboutUs";
 import AnimatedCounter from "./components/AnimatedCounter";
+import TalkButton from "./TalkButton";
 
 const App = () => {
   const [appReady, setAppReady] = useState(false);
@@ -119,6 +120,7 @@ const App = () => {
           </>
         )}
       </ReactLenis>
+      <TalkButton />
 
       {/* Loader overlays app */}
       {!appReady && <Loader />}

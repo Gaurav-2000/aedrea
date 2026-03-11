@@ -41,7 +41,7 @@ export default function TalkButton() {
 
   return (
     <button
-  onClick={active ? stop : start}
+  onClick={active ? stop: start}
   style={{
     position: "fixed",
     bottom: "30px",
@@ -49,7 +49,7 @@ export default function TalkButton() {
     width: "70px",
     height: "70px",
     borderRadius: "50%",
-    background: active ? "red" : "#3BE8B0",
+    background: active ? "red": "#3BE8B0",
     border: "none",
     fontSize: "24px",
     cursor: "pointer",
@@ -57,7 +57,7 @@ export default function TalkButton() {
     pointerEvents: "auto"
   }}
 >
-      {active ? "❌" : "📞"}
+      {active? "❌" : "📞"}
     </button>
   );
 }

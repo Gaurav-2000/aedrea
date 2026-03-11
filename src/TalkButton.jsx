@@ -6,35 +6,58 @@ export default function TalkButton() {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
-    vapiRef.current = new Vapi("c8b36349-057e-47b7-9366-33c8af8ee378");
+    const vapi = new Vapi("c8b36349-057e-47b7-9366-33c8af8ee378");
+    vapiRef.current = vapi;
 
-    vapiRef.current.on("call-start", () => setActive(true));
-    vapiRef.current.on("call-end", () => setActive(false));
+    vapi.on("call-start", () => {
+      console.log("Call started");
+      setActive(true);
+    });
 
-    return () => {
-      vapiRef.current?.stop();
-    };
+    vapi.on("call-end", () => {
+      console.log("Call ended");
+      setActive(false);
+    });
+
+    vapi.on("error", (e) => {
+      console.error("Vapi error:", e);
+    });
+
   }, []);
 
-  const start = () => vapiRef.current.start("c94f6989-cd5d-4370-a5eb-f7831b85e53d");
-  const stop = () => vapiRef.current.stop();
+  const start = () => {
+    if (!vapiRef.current) {
+      console.log("Vapi not initialized");
+      return;
+    }
+
+    console.log("Starting assistant...");
+    vapiRef.current.start("c94f6989-cd5d-4370-a5eb-f7831b85e53d");
+  };
+
+  const stop = () => {
+    vapiRef.current?.stop();
+  };
 
   return (
     <button
-      onClick={active ? stop : start}
-      style={{
-        padding: "15px 25px",
-        fontSize: "16px",
-        background: active ? "red" : "green",
-        color: "white",
-        border: "none",
-        borderRadius: "8px",
-        cursor: "pointer",
-        position: "relative",
-        zIndex: 9999
-      }}
-    >
-      {active ? "End Call" : "Talk to AI"}
+  onClick={active ? stop : start}
+  style={{
+    position: "fixed",
+    bottom: "30px",
+    right: "30px",
+    width: "70px",
+    height: "70px",
+    borderRadius: "50%",
+    background: active ? "red" : "#3BE8B0",
+    border: "none",
+    fontSize: "24px",
+    cursor: "pointer",
+    zIndex: 999999999,
+    pointerEvents: "auto"
+  }}
+>
+      {active ? "❌" : "📞"}
     </button>
   );
 }

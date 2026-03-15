@@ -4,15 +4,14 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { Room } from "./Room";
 import HeroLights from "./HeroLights";
-import Particles from "./Particles";
 
 const HeroExperiance = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
   return (
-    <Canvas frameloop="demand" camera={{ position: [0, 0, 15], fov: 45 }}>
+    <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
       <HeroLights />
-      {/* <Particles /> */}
+
       <OrbitControls
         enablePan={false} // Prevents panning of the scene
         enableZoom={false} // Disables zoom on tablets

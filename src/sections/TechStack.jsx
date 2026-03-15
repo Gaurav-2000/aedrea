@@ -137,7 +137,7 @@ const TechStack = () => {
   });
 
   return (
-    <section id="skills" className=" flex-center section-padding">
+    <section id="tools" className=" flex-center section-padding">
       <div className="w-full h-full md:px-10 px-5">
         <TitleHeader
           title="Our Capabilities & Core Expertise"

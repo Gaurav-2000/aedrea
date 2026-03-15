@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { navLinks } from "../constants";
-import logo from "../../public/images/logos/AEDREALogoWhite2.svg";
+import logo from "/images/logos/AEDREALogoWhite2.svg";
 
 const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);

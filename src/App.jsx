@@ -68,6 +68,9 @@ import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
 import AboutUs from "./sections/AboutUs";
 import AnimatedCounter from "./components/AnimatedCounter";
+import TextDropAnimation from "./sections/TextDropAnimation";
+
+import TalkButton from "./TalkButton";
 
 const App = () => {
   const [appReady, setAppReady] = useState(false);
@@ -103,9 +106,11 @@ const App = () => {
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef}>
         {appReady && (
           <>
+            <TalkButton />
             <NavBar />
             <Hero />
             {/* <AboutUs /> */}
+            <TextDropAnimation />
             <AnimatedCounter />
             <AnimatedText />
             <ShowcaseSection />

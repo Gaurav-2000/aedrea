@@ -55,7 +55,11 @@ const Hero = () => {
                 </span>
               </h1> */}
               <h1 className="font-semibold leading-tight text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
-                We build digital experiences
+                <span className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl italic font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-orange-400">
+                  AI-Powered
+                </span>
+                <br />
+                Digital Experiences
                 <span className="block font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
                   that
                   <span className="slide ">
@@ -81,10 +85,8 @@ const Hero = () => {
               {/* <h1>Into real projects </h1>
               <h1> That deliever Results </h1> */}
             </div>
-            <p className="text-white-50 italic md:text-xl relative z-10 pointer-events-none">
-              A focused design studio crafting fast, scalable, and
-              performance-driven <br />
-              digital experiences.
+            <p className="text-white/100 italic text-sm sm:text-base md:text-lg lg:text-xl relative z-10 opacity-40 hover:opacity-100 transition-opacity duration-300">
+              Smart design. AI automation. High-performance websites.
             </p>
             <Button
               className="md:w-80  md:h-16 w-60 h-12"

@@ -78,14 +78,12 @@ const App = () => {
   // Prepare app
   useEffect(() => {
     async function prepareApp() {
-      try {
-        await document.fonts.ready;
-      } catch (e) {
-        console.warn("Fonts not loaded:", e);
-      } finally {
-        // ✅ ALWAYS set ready - even if something fails
-        setAppReady(true);
-      }
+      await Promise.all([
+        document.fonts.ready,
+        fakeHeavyWork(), // replace later
+      ]);
+
+      setAppReady(true);
     }
 
     prepareApp();
@@ -134,6 +132,6 @@ const App = () => {
 export default App;
 
 // Demo only
-// function fakeHeavyWork() {
-//   return new Promise((resolve) => setTimeout(resolve, 1800));
-// }
+function fakeHeavyWork() {
+  return new Promise((resolve) => setTimeout(resolve, 1800));
+}

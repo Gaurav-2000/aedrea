@@ -124,6 +124,7 @@ const App = () => {
           </>
         )}
       </ReactLenis>
+      <TalkButton />
 
       {/* Loader overlays app */}
       {!appReady && <Loader />}

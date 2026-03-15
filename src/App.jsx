@@ -76,16 +76,28 @@ const App = () => {
   const lenisRef = useRef(null);
 
   // Prepare app
+  // useEffect(() => {
+  //   async function prepareApp() {
+  //     await Promise.all([
+  //       document.fonts.ready,
+  //       fakeHeavyWork(), // replace later
+  //     ]);
+
+  //     setAppReady(true);
+  //   }
+
+  //   prepareApp();
+  // }, []);
   useEffect(() => {
     async function prepareApp() {
-      await Promise.all([
-        document.fonts.ready,
-        fakeHeavyWork(), // replace later
-      ]);
-
-      setAppReady(true);
+      try {
+        await document.fonts.ready;
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppReady(true); // ✅ hamesha true hoga
+      }
     }
-
     prepareApp();
   }, []);
 
@@ -132,6 +144,6 @@ const App = () => {
 export default App;
 
 // Demo only
-function fakeHeavyWork() {
-  return new Promise((resolve) => setTimeout(resolve, 1800));
-}
+// function fakeHeavyWork() {
+//   return new Promise((resolve) => setTimeout(resolve, 1800));
+// }

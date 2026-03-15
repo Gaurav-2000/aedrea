@@ -66,9 +66,8 @@ import TechStack from "./sections/TechStack";
 import ScrollText from "./sections/ScrollText";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
-import AboutUs from "./sections/AboutUs";
+
 import AnimatedCounter from "./components/AnimatedCounter";
-import TextDropAnimation from "./sections/TextDropAnimation";
 
 import TalkButton from "./TalkButton";
 
@@ -109,8 +108,7 @@ const App = () => {
             <TalkButton />
             <NavBar />
             <Hero />
-            {/* <AboutUs /> */}
-            <TextDropAnimation />
+
             <AnimatedCounter />
             <AnimatedText />
             <ShowcaseSection />
@@ -124,7 +122,6 @@ const App = () => {
           </>
         )}
       </ReactLenis>
-      <TalkButton />
 
       {/* Loader overlays app */}
       {!appReady && <Loader />}

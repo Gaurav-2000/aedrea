@@ -1,4 +1,3 @@
-import React from "react";
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -58,7 +57,12 @@ const ShowcaseSection = () => {
           {/* left */}
           <div ref={project1Ref} className="first-project-wrapper">
             <div className="image-wrapper">
-              <img src="/images/Project 5.png" alt="" />
+              <img
+                src="/images/Project 5.webp"
+                alt="project"
+                loading="lazy" // ✅ load only when visible
+                decoding="async"
+              />
             </div>
             <div className="text-content">
               <h2>Learn to surf the fun way with the SurfTwins</h2>
@@ -73,7 +77,12 @@ const ShowcaseSection = () => {
           <div className="project-list-wrapper overflow-hidden">
             <div ref={project2Ref} className="project">
               <div className="image-wrapper bg-[#ffefdb]">
-                <img src="/images/project 6.png" alt="" />
+                <img
+                  src="/images/project 6.webp"
+                  alt="project"
+                  loading="lazy" // ✅ load only when visible
+                  decoding="async"
+                />
               </div>
               <h2>
                 PEOPLE VS COFFEE a Platform for connecting people while enjoying
@@ -82,7 +91,12 @@ const ShowcaseSection = () => {
             </div>
             <div ref={project3Ref} className="project">
               <div className="image-wrapper bg-[#f1c3a6]">
-                <img src="/images/project 7.png" alt="" />
+                <img
+                  src="/images/project 7.webp"
+                  alt="project"
+                  loading="lazy" // ✅ load only when visible
+                  decoding="async"
+                />
               </div>
               <h2>A Movies Searching App. </h2>
             </div>

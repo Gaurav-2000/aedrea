@@ -1,10 +1,14 @@
 import React from "react";
 import { words } from "../constants";
+import { lazy } from "react";
 import Button from "../components/Button";
-import HeroExperiance from "../components/HeroModels/HeroExperiance";
+// import HeroExperiance from "../components/HeroModels/HeroExperiance";
+const HeroExperiance = lazy(
+  () => import("../components/HeroModels/HeroExperiance"),
+);
+
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import AnimatedCounter from "../components/AnimatedCounter";
 
 const Hero = () => {
   useGSAP(() => {

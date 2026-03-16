@@ -1,15 +1,40 @@
 import React, { useRef, useMemo } from "react";
 import { useGLTF, useTexture } from "@react-three/drei";
-import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
-
-// ✅ Import only what you need instead of * as THREE
 import { MeshPhongMaterial, MeshStandardMaterial } from "three";
+
+// Dynamic import for postprocessing to avoid build issues on Vercel
+let EffectComposer, SelectiveBloom, BlendFunction;
+let postprocessingLoaded = false;
+
+function loadPostprocessing() {
+  if (postprocessingLoaded) return;
+  try {
+    // Only load on client side
+    if (typeof window !== "undefined") {
+      Promise.all([
+        import("@react-three/postprocessing"),
+        import("postprocessing"),
+      ]).then(([pp, ppLib]) => {
+        EffectComposer = pp.EffectComposer;
+        SelectiveBloom = pp.SelectiveBloom;
+        BlendFunction = ppLib.BlendFunction;
+        postprocessingLoaded = true;
+      }).catch(e => {
+        console.warn("Postprocessing load failed:", e);
+      });
+    }
+  } catch (e) {
+    console.warn("Postprocessing not available:", e);
+  }
+}
 
 export function Room(props) {
   const { nodes, materials } = useGLTF("/models/optimized-room.glb");
   const screensRef = useRef();
   const matcapTexture = useTexture("/images/textures/mat1.png");
+
+  // Try to load postprocessing
+  loadPostprocessing();
 
   // ✅ useMemo — materials created only ONCE, not on every render
   const curtainMaterial = useMemo(
@@ -41,19 +66,10 @@ export function Room(props) {
     [matcapTexture],
   );
 
+  // Render without postprocessing to avoid Vercel build issues
   return (
     <group {...props} dispose={null}>
-      <EffectComposer>
-        <SelectiveBloom
-          selection={screensRef}
-          intensity={0.2}
-          luminanceThreshold={0.2}
-          luminanceSmoothing={0.9}
-          blendFunction={BlendFunction.ADD}
-        />
-      </EffectComposer>
-
-      {/* your meshes stay exactly the same */}
+      {/* Meshes remain the same */}
       <mesh
         geometry={nodes._________6_blinn1_0.geometry}
         material={curtainMaterial}
@@ -175,4 +191,5 @@ export function Room(props) {
   );
 }
 
-useGLTF.preload("/models/optimized-room.glb");
+// Remove preload to prevent loading errors in production
+// useGLTF.preload("/models/optimized-room.glb");

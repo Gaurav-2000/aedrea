@@ -9,6 +9,9 @@ export default defineConfig({
     // ❌ viteImagemin removed - Vercel pe crash karta hai
   ],
 
+  // Ensure proper base path for Vercel
+  base: "/",
+
   build: {
     chunkSizeWarningLimit: 1300,
     rollupOptions: {

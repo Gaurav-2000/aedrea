@@ -79,14 +79,19 @@ const App = () => {
   useEffect(() => {
     async function prepareApp() {
       try {
-        // Wait for fonts with a timeout
-        const fontPromise = document.fonts.ready;
-        const timeoutPromise = new Promise((resolve) => 
-          setTimeout(resolve, 3000) // 3 second timeout
-        );
-        
-        // Race between fonts loading and timeout
-        await Promise.race([fontPromise, timeoutPromise]);
+        // Wait for fonts with a timeout (only in browser)
+        if (typeof document !== 'undefined') {
+          const fontPromise = document.fonts.ready;
+          const timeoutPromise = new Promise((resolve) => 
+            setTimeout(resolve, 3000) // 3 second timeout
+          );
+          
+          // Race between fonts loading and timeout
+          await Promise.race([fontPromise, timeoutPromise]);
+        } else {
+          // No document - just wait a bit
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
       } catch (e) {
         console.warn(e);
       } finally {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import { words } from "../constants";
 import { lazy } from "react";
 import Button from "../components/Button";
@@ -10,7 +10,25 @@ const HeroExperiance = lazy(
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
+const HeroLoader = () => (
+  <div className="w-full h-full flex items-center justify-center">
+    <div className="w-12 h-12 border-4 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
+
+// Fallback for when 3D isn't available
+const HeroFallback = () => (
+  <div className="w-full h-full flex items-center justify-center bg-neutral-900/50">
+    <div className="text-center">
+      <p className="text-white/30 text-sm">Loading...</p>
+    </div>
+  </div>
+);
+
 const Hero = () => {
+  const [hasError, setHasError] = useState(false);
+  const isClient = typeof window !== "undefined";
+  
   useGSAP(() => {
     gsap.fromTo(
       ".hero-text h1",
@@ -26,7 +44,18 @@ const Hero = () => {
         ease: "power2.inOut",
       },
     );
-  });
+  }, []);
+
+  // Error boundary handler for 3D scene
+  useEffect(() => {
+    const handleError = (event) => {
+      console.error("3D Scene Error:", event.error);
+      setHasError(true);
+    };
+    
+    window.addEventListener("error", handleError);
+    return () => window.removeEventListener("error", handleError);
+  }, []);
 
   return (
     <section className="relative overflow-hidden" id="hero">
@@ -103,7 +132,13 @@ const Hero = () => {
         {/* right 3d model */}
         <figure>
           <div className="hero-3d-layout">
-            <HeroExperiance />
+            {isClient && !hasError ? (
+              <Suspense fallback={<HeroLoader />}>
+                <HeroExperiance />
+              </Suspense>
+            ) : (
+              <HeroFallback />
+            )}
           </div>
         </figure>
       </div>

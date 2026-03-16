@@ -29,9 +29,13 @@ function loadPostprocessing() {
 }
 
 export function Room(props) {
-  const { nodes, materials } = useGLTF("/models/optimized-room.glb");
-  const screensRef = useRef();
+  // Load texture - Suspense will handle loading state
   const matcapTexture = useTexture("/images/textures/mat1.png");
+  
+  // Load GLTF model - Suspense will handle loading state
+  const { nodes, materials } = useGLTF("/models/optimized-room.glb");
+  
+  const screensRef = useRef();
 
   // Try to load postprocessing
   loadPostprocessing();

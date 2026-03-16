@@ -1,15 +1,48 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React from "react";
+import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { Room } from "./Room";
 import HeroLights from "./HeroLights";
 
+const ErrorFallback = () => (
+  <div className="w-full h-full flex items-center justify-center bg-neutral-900">
+    <p className="text-white/50 text-sm">Loading 3D...</p>
+  </div>
+);
+
 const HeroExperiance = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
-  const isTablet = useMediaQuery({ query: "(max-width: 1024px)" });
+  const [error, setError] = useState(null);
+
+  if (error) {
+    return <ErrorFallback />;
+  }
+
   return (
-    <Canvas camera={{ position: [0, 0, 15], fov: 45 }}>
+    <Canvas 
+      camera={{ position: [0, 0, 15], fov: 45 }}
+      onCreated={({ gl }) => {
+        gl.domElement.addEventListener('webglcontextlost', (e) => {
+          e.preventDefault();
+          console.warn('WebGL context lost');
+          setError(true);
+        });
+        gl.domElement.addEventListener('webglcontextrestored', () => {
+          console.log('WebGL context restored');
+          setError(false);
+        });
+      }}
+      gl={{ 
+        antialias: true, 
+        alpha: true,
+        powerPreference: "high-performance",
+        onError: (canvasError) => {
+          console.error("Canvas error:", canvasError);
+          setError(true);
+        }
+      }}
+    >
       <HeroLights />
 
       <OrbitControls

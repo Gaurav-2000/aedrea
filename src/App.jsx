@@ -75,27 +75,22 @@ const App = () => {
   const [appReady, setAppReady] = useState(false);
   const lenisRef = useRef(null);
 
-  // Prepare app
-  // useEffect(() => {
-  //   async function prepareApp() {
-  //     await Promise.all([
-  //       document.fonts.ready,
-  //       fakeHeavyWork(), // replace later
-  //     ]);
-
-  //     setAppReady(true);
-  //   }
-
-  //   prepareApp();
-  // }, []);
+  // Prepare app - with timeout to prevent getting stuck
   useEffect(() => {
     async function prepareApp() {
       try {
-        await document.fonts.ready;
+        // Wait for fonts with a timeout
+        const fontPromise = document.fonts.ready;
+        const timeoutPromise = new Promise((resolve) => 
+          setTimeout(resolve, 3000) // 3 second timeout
+        );
+        
+        // Race between fonts loading and timeout
+        await Promise.race([fontPromise, timeoutPromise]);
       } catch (e) {
         console.warn(e);
       } finally {
-        setAppReady(true); // ✅ hamesha true hoga
+        setAppReady(true);
       }
     }
     prepareApp();

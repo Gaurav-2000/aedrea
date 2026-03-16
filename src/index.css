@@ -3,6 +3,7 @@
 
 :root {
   --gradient: radial-gradient(circle, #e5e5e5 0%, #fff 100%);
+  --font-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
 }
 
 html,
@@ -12,7 +13,7 @@ body {
   background-color: black;
   color: white;
   scroll-behavior: smooth;
-  font-family: "Mona Sans", sans-serif;
+  font-family: "Mona Sans", var(--font-fallback);
 }
 
 section {
@@ -20,7 +21,7 @@ section {
 }
 
 @theme {
-  --font-sans: "Mona Sans", sans-serif;
+  --font-sans: "Mona Sans", var(--font-fallback);
   --color-white-50: #ffffff;
   --color-black-50: #1c1c21;
   --color-black-100: #0e0e10;

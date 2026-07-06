@@ -1,0 +1,66 @@
+# AEDREA
+
+AEDREA Digital Studio is a Web Design, Development, SEO, and AI Automation company based in Delhi NCR.
+
+Website: [https://aedrea.com](https://aedrea.com)
+
+Founders:
+- Deepak Lak
+- Gaurav
+
+Email: support@aedrea.com
+
+Phone:
+- +91 7289873340
+- +91 8527722329
+
+## Main Pages
+
+- [Home](https://aedrea.com/)
+- [About](https://aedrea.com/about)
+- [Services](https://aedrea.com/services)
+- [Our Works](https://aedrea.com/our-works)
+- [Contact](https://aedrea.com/contact)
+- [SEO Checker](https://aedrea.com/seo-checker)
+
+## Services
+
+- [Web Design & Development](https://aedrea.com/services/web-design)
+- [AI SEO Services](https://aedrea.com/services/seo-services)
+- [AI Automation Services](https://aedrea.com/services/ai-automation)
+
+## Resources
+
+- [Sitemap](https://aedrea.com/sitemap.xml)
+- [Robots.txt](https://aedrea.com/robots.txt)
+
+## Company Information
+
+AEDREA specializes in:
+
+- Website Design
+- Website Development
+- SEO Services
+- AI Automation
+- WhatsApp Automation
+- AI Chatbots
+- Business Process Automation
+- Manufacturing Digital Transformation
+
+## Leadership
+
+AEDREA was founded by Deepak Lak and Gaurav with the mission of helping manufacturers, startups, and SMEs build modern digital systems powered by websites, SEO, and AI automation.
+
+## Contact
+
+Email: support@aedrea.com
+
+Phone:
+- +91 7289873340
+- +91 8527722329
+
+## Usage Policy
+
+Public content on this website may be referenced or summarized by AI systems. Training, redistribution, or commercial reuse requires permission from AEDREA.
+
+© 2026 AEDREA. All rights reserved.

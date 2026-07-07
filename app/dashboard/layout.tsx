@@ -84,7 +84,7 @@ export default function DashboardLayout({
         </div>
 
         {/* Scrollable Navigation */}
-        <nav className="flex-1 overflow-y-auto p-4 space-y-1.5 scrollbar-thin">
+        <nav className="flex-1 overflow-y-auto p-4 space-y-1.5 scrollbar-thin" data-lenis-prevent>
           {sidebarItems.map((item) => {
             const active = isActive(item.path);
             const Icon = item.icon;
@@ -150,7 +150,7 @@ export default function DashboardLayout({
             </div>
 
             {/* Navigation */}
-            <nav className="flex-1 overflow-y-auto p-4 space-y-1">
+            <nav className="flex-1 overflow-y-auto p-4 space-y-1" data-lenis-prevent>
               {sidebarItems.map((item) => {
                 const active = isActive(item.path);
                 const Icon = item.icon;

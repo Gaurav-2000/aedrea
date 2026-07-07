@@ -97,7 +97,7 @@ body {
   --sidebar-border: #1E293B;
   --sidebar-ring: #2563EB;
 
-  --hover: #1D4ED8;
+  --primary-hover: #1D4ED8;
   --success: #22C55E;
   --warning: #F59E0B;
   --error: #EF4444;
@@ -149,7 +149,7 @@ section {
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-error: var(--error);
-  --color-hover: var(--hover);
+  --color-primary-hover: var(--primary-hover);
 }
 
 

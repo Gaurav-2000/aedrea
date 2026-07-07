@@ -20,7 +20,7 @@ export default function CustomersPage() {
           <button className="flex-1 sm:flex-none bg-muted border border-border text-foreground/80 hover:text-foreground px-3.5 py-2 rounded-lg text-sm flex items-center justify-center gap-2 cursor-pointer">
             <FileSpreadsheet className="w-4 h-4" /> Import/Export
           </button>
-          <button className="flex-1 sm:flex-none bg-primary hover:bg-hover text-primary-foreground font-semibold px-4 py-2 rounded-lg text-sm flex items-center justify-center gap-1.5 cursor-pointer">
+           <button className="flex-1 sm:flex-none bg-primary hover:bg-blue-700 text-primary-foreground font-semibold px-4 py-2 rounded-lg text-sm flex items-center justify-center gap-1.5 cursor-pointer">
             <Plus className="w-4.5 h-4.5" /> Add Customer
           </button>
         </div>

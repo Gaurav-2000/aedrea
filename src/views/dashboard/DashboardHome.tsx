@@ -46,7 +46,7 @@ export default function DashboardHome() {
           </p>
         </div>
         <div className="flex gap-3">
-          <button className="bg-primary hover:bg-hover text-primary-foreground font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors duration-200 cursor-pointer">
+          <button className="bg-primary hover:bg-blue-700 text-primary-foreground font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors duration-200 cursor-pointer">
             View AI Logs
           </button>
           <button className="bg-muted hover:bg-muted/80 text-foreground font-medium text-xs px-4 py-2.5 rounded-lg transition-colors border border-border cursor-pointer">

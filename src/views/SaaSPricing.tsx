@@ -63,7 +63,7 @@ export default function SaaSPricing() {
               </div>
               <a
                 href="/register?plan=professional"
-                className="mt-8 block text-center bg-primary hover:bg-hover text-primary-foreground font-bold py-2.5 rounded-lg text-sm transition-all"
+                className="mt-8 block text-center bg-primary hover:bg-blue-700 text-primary-foreground font-bold py-2.5 rounded-lg text-sm transition-all"
               >
                 Start 14-day Free Trial
               </a>

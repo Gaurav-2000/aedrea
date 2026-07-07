@@ -5,7 +5,7 @@ export default function EmployeesPage() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h3 className="text-sm font-semibold text-muted-foreground">Manage doctors & clinic staff</h3>
-        <button className="bg-primary hover:bg-hover text-primary-foreground font-semibold text-xs px-4 py-2.5 rounded-lg flex items-center gap-1.5 cursor-pointer">
+        <button className="bg-primary hover:bg-blue-700 text-primary-foreground font-semibold text-xs px-4 py-2.5 rounded-lg flex items-center gap-1.5 cursor-pointer">
           <Plus className="w-4 h-4" /> Add Employee
         </button>
       </div>

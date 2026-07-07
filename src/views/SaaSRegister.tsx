@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { X } from "lucide-react";
 import SEO from "../components/SEO";
 
 export default function SaaSRegister() {
@@ -24,9 +25,16 @@ export default function SaaSRegister() {
     <>
       <SEO title="Get Started | Aedrea AI Receptionist" description="Register a free trial for your clinic." />
       <div className="min-h-screen bg-background text-foreground flex items-center justify-center p-6 font-sans theme-enterprise-blue">
-        <div className="w-full max-w-sm bg-card border border-border rounded-2xl p-8 space-y-6 shadow-sm">
+        <div className="w-full max-w-sm bg-card border border-border rounded-2xl p-8 space-y-6 shadow-sm relative">
+          <Link
+            href="/"
+            className="absolute top-4 right-4 text-muted-foreground/60 hover:text-foreground p-1.5 hover:bg-muted rounded-full transition-all cursor-pointer"
+            aria-label="Close"
+          >
+            <X className="w-4 h-4" />
+          </Link>
           <div className="space-y-2 text-center">
-            <Link href="/" className="inline-block text-xl font-bold tracking-wider text-primary hover:text-hover">
+            <Link href="/" className="inline-block text-xl font-bold tracking-wider text-primary hover:text-blue-700">
               AEDREA
             </Link>
             <h2 className="text-lg font-semibold text-foreground">Start your 14-day trial</h2>
@@ -73,7 +81,7 @@ export default function SaaSRegister() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-primary hover:bg-hover text-primary-foreground font-semibold py-2.5 rounded-lg text-sm transition-all cursor-pointer"
+              className="w-full bg-primary hover:bg-blue-700 text-primary-foreground font-semibold py-2.5 rounded-lg text-sm transition-all cursor-pointer"
             >
               {loading ? "Creating workspace..." : "Create Account"}
             </button>
@@ -81,7 +89,7 @@ export default function SaaSRegister() {
 
           <div className="text-center text-xs text-muted-foreground pt-2 border-t border-border">
             Already have an account?{" "}
-            <Link href="/login" className="text-primary hover:text-hover hover:underline">
+            <Link href="/login" className="text-primary hover:text-blue-700 hover:underline">
               Sign In
             </Link>
           </div>

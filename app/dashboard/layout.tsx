@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Users,
@@ -55,10 +55,12 @@ export default function DashboardLayout({
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleLogout = () => {
     // Will hook into Supabase SignOut in Module 2
     console.log("Logging out...");
+    router.push("/login");
   };
 
   const isActive = (path: string) => {

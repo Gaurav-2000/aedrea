@@ -220,7 +220,7 @@ export default function DashboardLayout({
         </header>
 
         {/* Dynamic Route Content */}
-        <main className="flex-1 overflow-y-auto bg-background p-6 lg:p-8 scrollbar-thin">
+        <main className="flex-1 overflow-y-auto bg-background p-6 lg:p-8 scrollbar-thin" data-lenis-prevent>
           {children}
         </main>
       </div>

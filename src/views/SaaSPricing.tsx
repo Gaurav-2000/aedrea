@@ -1,4 +1,3 @@
-import NavBar from "../components/NavBar";
 import Footer from "../sections/Footer";
 import SEO from "../components/SEO";
 
@@ -9,7 +8,6 @@ export default function SaaSPricing() {
         title="Pricing | Aedrea AI Receptionist"
         description="Flexible, usage-based subscription pricing plans for dental clinics and local businesses."
       />
-      <NavBar />
       <main className="bg-background text-foreground min-h-screen pt-32 pb-20 font-sans theme-enterprise-blue">
         <div className="max-w-6xl mx-auto px-6 text-center space-y-12">
           <div className="space-y-4">

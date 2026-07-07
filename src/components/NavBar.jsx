@@ -285,10 +285,12 @@ const NavBar = () => {
     }
   };
 
+  const isPricing = pathname === "/pricing";
+
   return (
     <>
       <header
-        className={`navbar ${scrolled ? "scrolled backdrop-blur-xl !bg-black/50" : "not-scrolled !top-0"}`}
+        className={`navbar ${(scrolled || isPricing) ? "scrolled backdrop-blur-xl !bg-black/50 !top-0" : "not-scrolled !top-0"}`}
       >
         <div className="inner">
           {/* Logo */}

@@ -18,6 +18,8 @@ import NavBar from "../src/components/NavBar";
 import MusicPlayer from "../src/components/MusicPlayer";
 import Cursor from "../src/components/Cursor";
 import CookieConsent from "../src/components/CookieConsent";
+import { AuthProvider } from "../src/contexts/AuthContext";
+import ProtectedRoute from "../src/components/ProtectedRoute";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -166,7 +168,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   }, [pathname]);
 
   return (
-    <>
+    <AuthProvider>
       <ReactLenis
         root
         options={{
@@ -187,7 +189,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           {!isDashboardOrAuth && <NavBar />}
           {!isDashboardOrAuth && <MusicPlayer src="/images/bg-ambient.mp3" />}
           <AppShellContext.Provider value={{ startHero: startHeroAnimation, loaderComplete, videoSrc }}>
-            <Suspense fallback={null}>{children}</Suspense>
+            <Suspense fallback={null}>
+              {isDashboardOrAuth && (pathname !== "/login" && pathname !== "/register") ? (
+                <ProtectedRoute>{children}</ProtectedRoute>
+              ) : (
+                children
+              )}
+            </Suspense>
           </AppShellContext.Provider>
         </div>
       </ReactLenis>
@@ -206,6 +214,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           onVisibilityChange={setCookieConsentVisible}
         />
       )}
-    </>
+    </AuthProvider>
   );
 }

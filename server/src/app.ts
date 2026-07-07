@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import authRouter from "./routes/auth.routes";
 
 dotenv.config();
 
@@ -24,6 +25,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // ── Logging ───────────────────────────────────────────────────────────
 app.use(morgan("dev"));
+
+// ── Authentication Routes ─────────────────────────────────────────────
+app.use("/api/auth", authRouter);
 
 // ── Health Check ──────────────────────────────────────────────────────
 app.get("/health", (req: Request, res: Response) => {

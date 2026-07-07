@@ -3,22 +3,36 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 import SEO from "../components/SEO";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function SaaSRegister() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
   const router = useRouter();
+  const { register } = useAuth();
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Mock register and onboarding setup for now
-    setTimeout(() => {
-      setLoading(false);
-      router.push("/dashboard");
-    }, 800);
+    setError("");
+    setSuccessMsg("");
+
+    const result = await register(name, email, password, "Clinic", "Owner");
+    setLoading(false);
+
+    if (result.success) {
+      if (result.error) {
+        setSuccessMsg(result.error);
+      } else {
+        router.push("/dashboard");
+      }
+    } else {
+      setError(result.error || "Failed to create account.");
+    }
   };
 
   return (
@@ -40,6 +54,18 @@ export default function SaaSRegister() {
             <h2 className="text-lg font-semibold text-foreground">Start your 14-day trial</h2>
             <p className="text-xs text-muted-foreground">Launch your AI Receptionist in less than 5 minutes.</p>
           </div>
+
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/20 text-red-500 text-xs px-3.5 py-2.5 rounded-lg font-medium leading-normal text-center">
+              ⚠️ {error}
+            </div>
+          )}
+
+          {successMsg && (
+            <div className="bg-green-500/10 border border-green-500/20 text-green-600 text-xs px-3.5 py-2.5 rounded-lg font-medium leading-normal text-center">
+              ✉️ {successMsg}
+            </div>
+          )}
 
           <form onSubmit={handleRegister} className="space-y-4">
             <div className="space-y-1">

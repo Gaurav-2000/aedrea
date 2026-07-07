@@ -174,7 +174,7 @@ export default function Home() {
           <div className="reel-full__card">
             <video
               ref={videoRef}
-              src={videoSrc}
+              src={videoSrc || undefined}
               muted
               loop
               playsInline

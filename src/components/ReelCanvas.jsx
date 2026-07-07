@@ -438,7 +438,7 @@ export default function ReelCanvas({ videoSrc }) {
 
             <video
                 ref={videoRef}
-                src={finalVideoSrc}
+                src={finalVideoSrc || null}
                 muted
                 loop
                 playsInline

@@ -385,7 +385,7 @@ export default function Hero({ start, videoSrc }) {
         <span className="hero-reel" aria-hidden="true">
           <video
             ref={videoRef}
-            src={finalVideoSrc}
+            src={finalVideoSrc || null}
             muted
             loop
             playsInline

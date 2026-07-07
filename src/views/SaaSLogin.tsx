@@ -3,21 +3,29 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 import SEO from "../components/SEO";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function SaaSLogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
+  const { login } = useAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Mock login redirect to dashboard for now - fully integrated in Module 2
-    setTimeout(() => {
-      setLoading(false);
+    setError("");
+
+    const result = await login(email, password);
+    setLoading(false);
+
+    if (result.success) {
       router.push("/dashboard");
-    }, 800);
+    } else {
+      setError(result.error || "Invalid email or password.");
+    }
   };
 
   return (
@@ -39,6 +47,12 @@ export default function SaaSLogin() {
             <h2 className="text-lg font-semibold text-foreground">Sign in to your Portal</h2>
             <p className="text-xs text-muted-foreground">Enter clinic credentials below to manage your AI agent.</p>
           </div>
+
+          {error && (
+            <div className="bg-red-500/10 border border-red-500/20 text-red-500 text-xs px-3.5 py-2.5 rounded-lg font-medium leading-normal text-center">
+              ⚠️ {error}
+            </div>
+          )}
 
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-1">

@@ -75,7 +75,17 @@ const ScrollExpandMedia = ({
         boxShadow: "0 8px 40px rgba(0,0,0,0.4)",
       });
 
-      // ── Main scrub timeline ──────────────────────────────────────
+      // ── SKIP ANIMATIONS ON MOBILE ──────────────────────────────────────
+      if (isMobile) {
+        // Set wrapper height to minimum on mobile (no tall scroll spacer)
+        if (wrapperRef.current) {
+          wrapperRef.current.style.height = "100vh";
+        }
+        // Keep the card at initial size on mobile - no animation
+        return;
+      }
+
+      // ── Main scrub timeline (DESKTOP ONLY) ──────────────────────────────────────
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: wrapperRef.current, // tall spacer is the scroll trigger
@@ -167,8 +177,8 @@ const ScrollExpandMedia = ({
         );
       }
 
-      // ── Children entry animation (separate trigger) ──────────────
-      if (childrenRef.current) {
+      // ── Children entry animation (separate trigger - DESKTOP ONLY) ──────────────
+      if (childrenRef.current && !isMobile) {
         // Target explicit .sem-reveal elements, or fall back to common tags
         const childItems = childrenRef.current.querySelectorAll(
           ".sem-reveal, h1, h2, h3, h4, p, span, li, a, button, [data-reveal]",

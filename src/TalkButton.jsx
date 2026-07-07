@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import SupportButton from "./components/SupportButton";
 
-const VAPI_KEY = import.meta.env.VITE_VAPI_KEY;
-const ASSISTANT_ID = import.meta.env.VITE_VAPI_ASSISTANT_ID;
+const VAPI_KEY = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_VAPI_KEY : "";
+const ASSISTANT_ID = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID : "";
 
 export default function TalkButton() {
   const vapiRef = useRef(null);

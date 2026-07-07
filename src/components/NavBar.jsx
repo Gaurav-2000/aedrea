@@ -5,7 +5,8 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { navLinks } from "../constants";
 import logo from "@/assets/AEDREALogoWhite2.svg";
@@ -24,7 +25,7 @@ const SOCIAL_ITEMS = [
 ];
 
 const NavBar = () => {
-  const location = useLocation();
+  const pathname = usePathname();
 
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -64,7 +65,7 @@ const NavBar = () => {
   useEffect(() => {
     if (openRef.current) closeMenu();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname]);
+  }, [pathname]);
 
   // ── Initial GSAP setup ────────────────────────────────────────────────────
   useLayoutEffect(() => {
@@ -291,9 +292,9 @@ const NavBar = () => {
       >
         <div className="inner">
           {/* Logo */}
-          <Link to="/" className="logo">
+          <Link href="/" className="logo">
             <div className="flex items-center gap-2">
-              <img className="w-10 md:w-12" src={logo} alt="Aedrea " />
+              <img className="w-10 md:w-12" src={logo?.src || logo} alt="Aedrea " />
               <p className="text-white font-medium">AEDREA</p>
             </div>
           </Link>
@@ -301,26 +302,89 @@ const NavBar = () => {
           {/* Desktop nav */}
           <nav className="desktop">
             <ul>
-              {navLinks.map(({ link, name }) => (
-                <li key={name} className="group">
-                  {link.startsWith("/") && !link.startsWith("/#") ? (
-                    <Link to={link}>
-                      <span>{name}</span>
-                      <span className="underline" />
-                    </Link>
-                  ) : (
-                    <a href={link} onClick={(e) => handleNavClick(e, link)}>
-                      <span>{name}</span>
-                      <span className="underline" />
-                    </a>
-                  )}
-                </li>
-              ))}
+              {navLinks.map(({ link, name }) => {
+                if (name === "Services") {
+                  return (
+                    <li key={name} className="group relative">
+                      <Link href={link} className="flex items-center gap-1">
+                        <span>{name}</span>
+                        <svg
+                          className="w-3 h-3 text-white/40 group-hover:rotate-180 transition-transform duration-300 mt-0.5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                        <span className="underline" />
+                      </Link>
+                      
+                      {/* Apple-clean Services Dropdown */}
+                      <div className="absolute top-[100%] left-1/2 -translate-x-1/2 pt-2 w-64 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50 text-left">
+                        <div className="bg-[#0d0d12]/95 border border-[#1a1a24] backdrop-blur-xl rounded-xl p-2 shadow-2xl space-y-0.5">
+                          <Link
+                            href="/services"
+                            className="block px-3 py-2 rounded-lg hover:bg-white/5 transition-all text-xs font-semibold text-white/95"
+                          >
+                            <p className="font-semibold text-white">All Services</p>
+                            <p className="text-[10px] text-white/40 font-normal mt-0.5">Explore our capabilities</p>
+                          </Link>
+                          <div className="h-px bg-white/5 my-1" />
+                          <Link
+                            href="/services/web-design"
+                            className="block px-3 py-2 rounded-lg hover:bg-white/5 transition-all text-xs font-semibold text-white/95"
+                          >
+                            <p className="font-semibold text-white">Web Design & Dev</p>
+                            <p className="text-[10px] text-white/40 font-normal mt-0.5">High-performance corporate sites</p>
+                          </Link>
+                          <Link
+                            href="/services/seo-services"
+                            className="block px-3 py-2 rounded-lg hover:bg-white/5 transition-all text-xs font-semibold text-white/95"
+                          >
+                            <p className="font-semibold text-white">AI SEO Services</p>
+                            <p className="text-[10px] text-white/40 font-normal mt-0.5">Rank on Google first page</p>
+                          </Link>
+                          <Link
+                            href="/services/ai-automation"
+                            className="block px-3 py-2 rounded-lg hover:bg-white/5 transition-all text-xs font-semibold text-white/95"
+                          >
+                            <p className="font-semibold text-white">AI Automation</p>
+                            <p className="text-[10px] text-white/40 font-normal mt-0.5">WhatsApp bots & receptionists</p>
+                          </Link>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                }
+
+                return (
+                  <li key={name} className="group">
+                    {link.startsWith("/") && !link.startsWith("/#") ? (
+                      <Link href={link}>
+                        <span>{name}</span>
+                        <span className="underline" />
+                      </Link>
+                    ) : (
+                      <a href={link} onClick={(e) => handleNavClick(e, link)}>
+                        <span>{name}</span>
+                        <span className="underline" />
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </nav>
 
           {/* Right side */}
           <div className="flex items-center gap-4">
+            <Link
+              href="/login"
+              className="hidden md:inline-block text-xs font-semibold text-white/80 hover:text-white border border-white/10 hover:border-white/20 px-4 py-2 rounded-full transition-all duration-300"
+            >
+              SaaS Login
+            </Link>
             <TalkButton />
 
             {/* ── Hamburger button ── */}
@@ -447,7 +511,7 @@ const NavBar = () => {
                 >
                   {link.startsWith("/") && !link.startsWith("/#") ? (
                     <Link
-                      to={link}
+                      href={link}
                       onClick={closeMenu}
                       className="sm-panel-item"
                       data-index={i + 1}

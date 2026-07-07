@@ -1,5 +1,5 @@
 // components/RedirectButton.jsx
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 const RedirectButton = ({
   to,
@@ -13,7 +13,7 @@ const RedirectButton = ({
   onClick,
   ariaLabel,
 }) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleClick = (e) => {
     if (disabled) return;
@@ -22,7 +22,7 @@ const RedirectButton = ({
       window.open(href, target || "_blank", rel || "noopener noreferrer");
       return;
     }
-    if (to) navigate(to);
+    if (to) router.push(to);
   };
 
   const letters = String(children).split("");

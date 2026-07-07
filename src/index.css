@@ -807,7 +807,7 @@ html.reel-native .reel-morph {
     @apply flex justify-center items-center w-52 h-60 relative;
   }
 
-  form {
+  .contact-form {
     label {
       @apply block text-white-50 mb-2;
     }

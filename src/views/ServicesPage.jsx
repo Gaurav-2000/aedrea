@@ -3,7 +3,6 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "@/sections/Footer";
 import SEO from "@/components/SEO";
-import { useNavigate } from "react-router-dom";
 import RedirectButton from "@/components/RedirectButton";
 import { whyPoints, marqueeItems } from "@/constants";
 
@@ -327,7 +326,6 @@ export default function ServicesPage() {
   const cardsRef = useRef([]);
   const lineRef = useRef(null);
   const servicesListRef = useRef(null); // ← NEW: ref on the services list wrapper
-  const navigate = useNavigate();
 
   // ── Cursor state
   const [activeService, setActiveService] = useState(null);

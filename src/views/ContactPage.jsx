@@ -101,8 +101,8 @@ export default function ContactPage() {
     setSubmitError(false);
     try {
       await emailjs.send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
         {
           from_name: form.name,
           from_email: form.email,
@@ -110,7 +110,7 @@ export default function ContactPage() {
           service: form.service,
           message: form.message,
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "",
       );
       setSent(true);
       setForm({ name: "", email: "", phone: "", service: "", message: "" });
@@ -403,7 +403,7 @@ export default function ContactPage() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="contact-form space-y-5">
                 {submitError && (
                   <div className="rounded-xl border border-red-500/30 bg-red-500/5 p-4 text-center text-sm text-red-400">
                     Something went wrong, please try again or message us on{" "}

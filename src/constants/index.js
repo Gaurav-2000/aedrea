@@ -3,8 +3,10 @@ const navLinks = [
   { name: "AboutUs", link: "/about" },
   { name: "OurWorks", link: "/our-works" },
   { name: "Services", link: "/services" }, // ← full page navigate
+  { name: "Pricing", link: "/pricing" },
   { name: "Seo-Checker", link: "/seo-checker" }, // ← full page navigate
   { name: "ContactUs", link: "/contact" }, // ← full page navigate
+  { name: "SaaS Login", link: "/login" },
 ];
 const counterItems = [
   { value: 1, suffix: "+", label: "Years of Experience" },

@@ -210,7 +210,7 @@ export function useHeroAnimation(sectionRef, start) {
           // ROW 3: "people" / reel / "remember"
           // ═══════════════════════════════════════════════════
           const isDesktop = window.matchMedia(
-              "(min-width: 768px) and (pointer: fine) and (prefers-reduced-motion: no-preference)"
+            "(min-width: 768px) and (pointer: fine) and (prefers-reduced-motion: no-preference)"
           ).matches;
 
           if (isDesktop) {

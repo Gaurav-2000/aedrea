@@ -24,7 +24,6 @@ const ReelCanvas = lazy(() => import("@/components/ReelCanvas"));
 const HomePage = ({ startHero, loaderComplete, videoSrc }) => {
   const finalVideoSrc = videoSrc;
   const videoRef = useRef(null);
-  const playStartedRef = useRef(false);
 
   useEffect(() => {
     const video = videoRef.current;

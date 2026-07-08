@@ -15,7 +15,7 @@ const RedirectButton = ({
 }) => {
   const router = useRouter();
 
-  const handleClick = (e) => {
+  const handleClick = () => {
     if (disabled) return;
     if (onClick) onClick();
     if (href) {

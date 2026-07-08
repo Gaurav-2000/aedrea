@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Footer from "@/sections/Footer";
@@ -320,6 +321,7 @@ function CursorPreview({ activeService, visible }) {
 // ─── COMPONENT ───────────────────────────────────────────────────────────────
 
 export default function ServicesPage() {
+  const router = useRouter();
   const heroRef = useRef(null);
   const marqueeRef = useRef(null);
   const whyRef = useRef(null);
@@ -570,7 +572,7 @@ export default function ServicesPage() {
               key={svc.id}
               ref={(el) => (cardsRef.current[i] = el)}
               style={{ opacity: 0 }}
-              onClick={() => svc.slug && navigate(`/services/${svc.slug}`)}
+              onClick={() => svc.slug && router.push(`/services/${svc.slug}`)}
               onMouseEnter={() => handleRowEnter(svc)} // ← NEW
               onMouseLeave={handleRowLeave} // ← NEW
               className={`

@@ -104,20 +104,254 @@ const supportsWebGLDevice = typeof window !== "undefined" ? (() => {
     }
 })() : false;
 
+function initWebGL(container, canvas, video, videoTex, isDisposed) {
+    let renderer, scene, camera, mesh, trigger, observer, checkDisposed;
+    try {
+        // Create WebGL Renderer
+        renderer = new WebGLRenderer({
+            canvas: canvas,
+            alpha: true,
+            antialias: false,
+            powerPreference: "high-performance",
+            depth: false,
+            stencil: false,
+        });
+        renderer.setClearColor(0, 0);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        scene = new Scene();
+        camera = new PerspectiveCamera(45, 1, 0.1, 100);
+        camera.position.z = 3;
+
+        // Initialize uniforms
+        const uniforms = {
+            uTexture: { value: videoTex },
+            uVideoAspect: { value: 16 / 9 },
+            uRadius: { value: 28 },
+            uFrom: { value: new Vector4(0, 0, 1, 1) },
+            uTo: { value: new Vector4(0, 0, 1, 1) },
+            uShow: { value: 0 },
+            uVp: { value: new Vector2(1, 1) },
+            uFit: { value: new Vector2(1, 1) },
+            uVelMap: { value: null },
+            uVelAmt: { value: 0 },
+            uVelScale: { value: 1 },
+        };
+
+        // Set video aspect if metadata is already loaded
+        if (video.videoWidth && video.videoHeight) {
+            uniforms.uVideoAspect.value = video.videoWidth / video.videoHeight;
+        }
+        video.addEventListener("loadedmetadata", () => {
+            uniforms.uVideoAspect.value = video.videoWidth / video.videoHeight;
+        });
+
+        const material = new ShaderMaterial({
+            vertexShader,
+            fragmentShader,
+            uniforms,
+            transparent: true,
+            depthTest: false,
+            depthWrite: false,
+            side: DoubleSide,
+        });
+
+        // Reduced from (140, 90) = 12,600 vertices to (50, 32) = 1,600 vertices
+        // Still visually smooth but 87% fewer vertices — big win on mid-range GPUs
+        mesh = new Mesh(new PlaneGeometry(1, 1, 50, 32), material);
+        mesh.frustumCulled = false;
+        scene.add(mesh);
+
+        let fitW = 1,
+            fitH = 1;
+        const resizeRenderer = () => {
+            const w = window.innerWidth;
+            const h = window.innerHeight;
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+
+            // Fit plane to camera perspective z=3
+            const fovRad = (camera.fov * Math.PI) / 180;
+            fitH = 2 * Math.tan(fovRad / 2) * camera.position.z;
+            fitW = fitH * camera.aspect;
+        };
+
+        resizeRenderer();
+        window.addEventListener("resize", resizeRenderer);
+
+        // Scroll trigger for progress
+        let scrollProgress = 0;
+        const introEl = document.querySelector(".intro");
+        trigger = introEl ? ScrollTrigger.create({
+            trigger: introEl,
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+            onUpdate: (self) => {
+                scrollProgress = self.progress;
+            },
+        }) : null;
+
+        // Make container visible
+        gsap.set(container, { opacity: 1 });
+
+        // Link the cursor velocity map canvas texture
+        let velocityTexture = null;
+        let lastPointerTime = 0;
+
+        const keepPointerActive = () => {
+            lastPointerTime = performance.now();
+        };
+        window.addEventListener("pointermove", keepPointerActive, {
+            passive: true,
+        });
+
+        // Set up IntersectionObserver to only render and play when visible
+        let canvasInView = true;
+        let forceUpdate = true;
+        observer = new IntersectionObserver(
+            ([entry]) => {
+                if (isDisposed()) return;
+                canvasInView = entry.isIntersecting;
+                if (canvasInView) {
+                    forceUpdate = true;
+                    video.play().catch(() => {});
+                } else {
+                    video.pause();
+                }
+            },
+            { threshold: 0 },
+        );
+        observer.observe(canvas);
+
+        // Tick loop
+        let prevProgress = -1;
+        let prevScrollY = -1;
+
+        const animate = () => {
+            if (isDisposed()) return;
+
+            if (!canvasInView) {
+                requestAnimationFrame(animate);
+                return;
+            }
+
+            const scrollY = window.scrollY;
+            const activePointer = performance.now() - lastPointerTime < 4000;
+            const isVideoPlaying =
+                !video.paused && !video.ended && video.readyState >= 2;
+
+            // Skip render if no visual state changed and video is not playing
+            if (
+                !isVideoPlaying &&
+                !forceUpdate &&
+                scrollProgress === prevProgress &&
+                scrollY === prevScrollY &&
+                !activePointer
+            ) {
+                requestAnimationFrame(animate);
+                return;
+            }
+
+            forceUpdate = false;
+            prevProgress = scrollProgress;
+            prevScrollY = scrollY;
+
+            // Lazy load velocity Canvas texture once available
+            if (!velocityTexture && window.velocityCanvas) {
+                velocityTexture = new CanvasTexture(window.velocityCanvas);
+                velocityTexture.flipY = false;
+                velocityTexture.minFilter = LinearFilter;
+                velocityTexture.magFilter = LinearFilter;
+                velocityTexture.generateMipmaps = false;
+                uniforms.uVelMap.value = velocityTexture;
+                uniforms.uVelAmt.value = 0.06;
+            }
+
+            const fromEl = document.querySelector(".hero-reel");
+            const toEl = document.querySelector(".reel-full__card");
+
+            if (fromEl && toEl) {
+                const fromRect = fromEl.getBoundingClientRect();
+                const toRect = toEl.getBoundingClientRect();
+
+                uniforms.uFrom.value.set(
+                    fromRect.left,
+                    fromRect.top,
+                    Math.max(1, fromRect.width),
+                    Math.max(1, fromRect.height),
+                );
+                uniforms.uTo.value.set(
+                    toRect.left,
+                    toRect.top,
+                    Math.max(1, toRect.width),
+                    Math.max(1, toRect.height),
+                );
+                uniforms.uShow.value = scrollProgress;
+                uniforms.uVp.value.set(window.innerWidth, window.innerHeight);
+                uniforms.uFit.value.set(fitW, fitH);
+                uniforms.uRadius.value = 14;
+
+                // Scale velocity by size aspect ratio
+                const currentWidth =
+                    fromRect.width + (toRect.width - fromRect.width) * scrollProgress;
+                uniforms.uVelScale.value = Math.min(
+                    3,
+                    Math.max(1, toRect.width / Math.max(1, currentWidth)),
+                );
+
+                if (velocityTexture && activePointer) {
+                    velocityTexture.needsUpdate = true;
+                }
+
+                renderer.render(scene, camera);
+            }
+
+            requestAnimationFrame(animate);
+        };
+
+        requestAnimationFrame(animate);
+
+        // Cleanup is handled by the disposed flag from the outer useEffect
+        // but we still need to clean up event listeners and WebGL resources
+        // when the outer effect's disposed flag is set
+        checkDisposed = setInterval(() => {
+            if (isDisposed()) {
+                clearInterval(checkDisposed);
+                window.removeEventListener("resize", resizeRenderer);
+                window.removeEventListener("pointermove", keepPointerActive);
+                trigger?.kill();
+                if (renderer) renderer.dispose();
+                if (observer) observer.disconnect();
+            }
+        }, 500);
+    } catch (e) {
+        console.warn("WebGL setup failed, falling back to native video:", e);
+        document.documentElement.classList.add("reel-native");
+        if (renderer) {
+            try { renderer.dispose(); } catch { /* ignore */ }
+        }
+        if (trigger) {
+            try { trigger.kill(); } catch { /* ignore */ }
+        }
+        if (observer) {
+            try { observer.disconnect(); } catch { /* ignore */ }
+        }
+        if (checkDisposed) {
+            clearInterval(checkDisposed);
+        }
+    }
+}
+
 export default function ReelCanvas({ videoSrc }) {
     const finalVideoSrc = videoSrc;
-    if (!isDesktopDevice || !supportsWebGLDevice) {
-        if (typeof document !== "undefined") {
-            document.documentElement.classList.add("reel-native");
-        }
-        return null;
-    }
-
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
     const videoRef = useRef(null);
 
     useEffect(() => {
+        if (!isDesktopDevice || !supportsWebGLDevice) return;
         const container = containerRef.current;
         const canvas = canvasRef.current;
         const video = videoRef.current;
@@ -192,246 +426,15 @@ export default function ReelCanvas({ videoSrc }) {
         return () => { disposed = true; };
     }, []);
 
-    /** Initialises the full WebGL pipeline once the video has frame data */
-    function initWebGL(container, canvas, video, videoTex, isDisposed) {
-        let renderer, scene, camera, mesh, trigger, observer, checkDisposed;
-        try {
-            // Create WebGL Renderer
-            renderer = new WebGLRenderer({
-                canvas: canvas,
-                alpha: true,
-                antialias: false,
-                powerPreference: "high-performance",
-                depth: false,
-                stencil: false,
-            });
-            renderer.setClearColor(0, 0);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            scene = new Scene();
-            camera = new PerspectiveCamera(45, 1, 0.1, 100);
-            camera.position.z = 3;
-
-            // Initialize uniforms
-            const uniforms = {
-                uTexture: { value: videoTex },
-                uVideoAspect: { value: 16 / 9 },
-                uRadius: { value: 28 },
-                uFrom: { value: new Vector4(0, 0, 1, 1) },
-                uTo: { value: new Vector4(0, 0, 1, 1) },
-                uShow: { value: 0 },
-                uVp: { value: new Vector2(1, 1) },
-                uFit: { value: new Vector2(1, 1) },
-                uVelMap: { value: null },
-                uVelAmt: { value: 0 },
-                uVelScale: { value: 1 },
-            };
-
-            // Set video aspect if metadata is already loaded
-            if (video.videoWidth && video.videoHeight) {
-                uniforms.uVideoAspect.value = video.videoWidth / video.videoHeight;
-            }
-            video.addEventListener("loadedmetadata", () => {
-                uniforms.uVideoAspect.value = video.videoWidth / video.videoHeight;
-            });
-
-            const material = new ShaderMaterial({
-                vertexShader,
-                fragmentShader,
-                uniforms,
-                transparent: true,
-                depthTest: false,
-                depthWrite: false,
-                side: DoubleSide,
-            });
-
-            // Reduced from (140, 90) = 12,600 vertices to (50, 32) = 1,600 vertices
-            // Still visually smooth but 87% fewer vertices — big win on mid-range GPUs
-            mesh = new Mesh(new PlaneGeometry(1, 1, 50, 32), material);
-            mesh.frustumCulled = false;
-            scene.add(mesh);
-
-            let fitW = 1,
-                fitH = 1;
-            const resizeRenderer = () => {
-                const w = window.innerWidth;
-                const h = window.innerHeight;
-                renderer.setSize(w, h, false);
-                camera.aspect = w / h;
-                camera.updateProjectionMatrix();
-
-                // Fit plane to camera perspective z=3
-                const fovRad = (camera.fov * Math.PI) / 180;
-                fitH = 2 * Math.tan(fovRad / 2) * camera.position.z;
-                fitW = fitH * camera.aspect;
-            };
-
-            resizeRenderer();
-            window.addEventListener("resize", resizeRenderer);
-
-            // Scroll trigger for progress
-            let scrollProgress = 0;
-            const introEl = document.querySelector(".intro");
-            trigger = introEl ? ScrollTrigger.create({
-                trigger: introEl,
-                start: "top top",
-                end: "bottom top",
-                scrub: true,
-                onUpdate: (self) => {
-                    scrollProgress = self.progress;
-                },
-            }) : null;
-
-            // Make container visible
-            gsap.set(container, { opacity: 1 });
-
-            // Link the cursor velocity map canvas texture
-            let velocityTexture = null;
-            let lastPointerTime = 0;
-
-            const keepPointerActive = () => {
-                lastPointerTime = performance.now();
-            };
-            window.addEventListener("pointermove", keepPointerActive, {
-                passive: true,
-            });
-
-            // Set up IntersectionObserver to only render and play when visible
-            let canvasInView = true;
-            let forceUpdate = true;
-            observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (isDisposed()) return;
-                    canvasInView = entry.isIntersecting;
-                    if (canvasInView) {
-                        forceUpdate = true;
-                        video.play().catch(() => {});
-                    } else {
-                        video.pause();
-                    }
-                },
-                { threshold: 0 },
-            );
-            observer.observe(canvas);
-
-            // Tick loop
-            let prevProgress = -1;
-            let prevScrollY = -1;
-
-            const animate = () => {
-                if (isDisposed()) return;
-
-                if (!canvasInView) {
-                    requestAnimationFrame(animate);
-                    return;
-                }
-
-                const scrollY = window.scrollY;
-                const activePointer = performance.now() - lastPointerTime < 4000;
-                const isVideoPlaying =
-                    !video.paused && !video.ended && video.readyState >= 2;
-
-                // Skip render if no visual state changed and video is not playing
-                if (
-                    !isVideoPlaying &&
-                    !forceUpdate &&
-                    scrollProgress === prevProgress &&
-                    scrollY === prevScrollY &&
-                    !activePointer
-                ) {
-                    requestAnimationFrame(animate);
-                    return;
-                }
-
-                forceUpdate = false;
-                prevProgress = scrollProgress;
-                prevScrollY = scrollY;
-
-                // Lazy load velocity Canvas texture once available
-                if (!velocityTexture && window.velocityCanvas) {
-                    velocityTexture = new CanvasTexture(window.velocityCanvas);
-                    velocityTexture.flipY = false;
-                    velocityTexture.minFilter = LinearFilter;
-                    velocityTexture.magFilter = LinearFilter;
-                    velocityTexture.generateMipmaps = false;
-                    uniforms.uVelMap.value = velocityTexture;
-                    uniforms.uVelAmt.value = 0.06;
-                }
-
-                const fromEl = document.querySelector(".hero-reel");
-                const toEl = document.querySelector(".reel-full__card");
-
-                if (fromEl && toEl) {
-                    const fromRect = fromEl.getBoundingClientRect();
-                    const toRect = toEl.getBoundingClientRect();
-
-                    uniforms.uFrom.value.set(
-                        fromRect.left,
-                        fromRect.top,
-                        Math.max(1, fromRect.width),
-                        Math.max(1, fromRect.height),
-                    );
-                    uniforms.uTo.value.set(
-                        toRect.left,
-                        toRect.top,
-                        Math.max(1, toRect.width),
-                        Math.max(1, toRect.height),
-                    );
-                    uniforms.uShow.value = scrollProgress;
-                    uniforms.uVp.value.set(window.innerWidth, window.innerHeight);
-                    uniforms.uFit.value.set(fitW, fitH);
-                    uniforms.uRadius.value = 14;
-
-                    // Scale velocity by size aspect ratio
-                    const currentWidth =
-                        fromRect.width + (toRect.width - fromRect.width) * scrollProgress;
-                    uniforms.uVelScale.value = Math.min(
-                        3,
-                        Math.max(1, toRect.width / Math.max(1, currentWidth)),
-                    );
-
-                    if (velocityTexture && activePointer) {
-                        velocityTexture.needsUpdate = true;
-                    }
-
-                    renderer.render(scene, camera);
-                }
-
-                requestAnimationFrame(animate);
-            };
-
-            requestAnimationFrame(animate);
-
-            // Cleanup is handled by the disposed flag from the outer useEffect
-            // but we still need to clean up event listeners and WebGL resources
-            // when the outer effect's disposed flag is set
-            checkDisposed = setInterval(() => {
-                if (isDisposed()) {
-                    clearInterval(checkDisposed);
-                    window.removeEventListener("resize", resizeRenderer);
-                    window.removeEventListener("pointermove", keepPointerActive);
-                    trigger?.kill();
-                    if (renderer) renderer.dispose();
-                    if (observer) observer.disconnect();
-                }
-            }, 500);
-        } catch (e) {
-            console.warn("WebGL setup failed, falling back to native video:", e);
+    if (!isDesktopDevice || !supportsWebGLDevice) {
+        if (typeof document !== "undefined") {
             document.documentElement.classList.add("reel-native");
-            if (renderer) {
-                try { renderer.dispose(); } catch (err) {}
-            }
-            if (trigger) {
-                try { trigger.kill(); } catch (err) {}
-            }
-            if (observer) {
-                try { observer.disconnect(); } catch (err) {}
-            }
-            if (checkDisposed) {
-                clearInterval(checkDisposed);
-            }
         }
+        return null;
     }
+
+    /** Initialises the full WebGL pipeline once the video has frame data */
+
 
     return (
         <>

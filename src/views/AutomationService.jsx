@@ -208,15 +208,10 @@ export default function AutomationService() {
   const statsRef = useRef(null);
   const marqueeRef = useRef(null);
   const cardsRef = useRef([]);
-  cardsRef.current = [];
   const stepsRef = useRef([]);
-  stepsRef.current = [];
   const techRef = useRef([]);
-  techRef.current = [];
   const pricingRef = useRef([]);
-  pricingRef.current = [];
   const sectionsRef = useRef([]);
-  sectionsRef.current = [];
 
 
 

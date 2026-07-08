@@ -229,15 +229,10 @@ export default function WebDesignService() {
   const actionsRef = useRef(null);
   const statsRef = useRef(null);
   const cardsRef = useRef([]);
-  cardsRef.current = [];
   const stepsRef = useRef([]);
-  stepsRef.current = [];
   const techRef = useRef([]);
-  techRef.current = [];
   const pricingRef = useRef([]);
-  pricingRef.current = [];
   const sectionsRef = useRef([]);
-  sectionsRef.current = [];
 
 
 

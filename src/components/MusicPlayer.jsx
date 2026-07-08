@@ -5,8 +5,6 @@ export default function MusicPlayer({ src }) {
   const audioRef = useRef(null);
   const [playing, setPlaying] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const srcRef = useRef(src);
-  srcRef.current = src;
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,7 +23,7 @@ export default function MusicPlayer({ src }) {
   const toggle = () => {
     // Lazy-create audio on first click — avoids 4.3MB download on page load
     if (!audioRef.current) {
-      audioRef.current = new Audio(srcRef.current);
+      audioRef.current = new Audio(src);
       audioRef.current.loop = true;
       audioRef.current.volume = 0.05;
     }

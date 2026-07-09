@@ -1976,3 +1976,12 @@ html.reel-native .reel-morph {
   outline: 2px solid #FF6B00 !important;
   outline-offset: 2px !important;
 }
+
+input:focus,
+textarea:focus,
+select:focus,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none !important;
+}

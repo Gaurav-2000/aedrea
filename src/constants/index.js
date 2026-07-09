@@ -3,10 +3,10 @@ const navLinks = [
   { name: "AboutUs", link: "/about" },
   { name: "OurWorks", link: "/our-works" },
   { name: "Services", link: "/services" }, // ← full page navigate
-  { name: "Pricing", link: "#" },
+  { name: "Pricing", link: "https://leados-kappa.vercel.app/" },
   { name: "Seo-Checker", link: "/seo-checker" }, // ← full page navigate
   { name: "ContactUs", link: "/contact" }, // ← full page navigate
-  { name: "Login", link: "#" },
+  { name: "LeadOS Login", link: "https://leados-kappa.vercel.app/" },
 ];
 const counterItems = [
   { value: 1, suffix: "+", label: "Years of Experience" },

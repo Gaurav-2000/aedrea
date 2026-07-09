@@ -18,8 +18,6 @@ import NavBar from "../src/components/NavBar";
 import MusicPlayer from "../src/components/MusicPlayer";
 import Cursor from "../src/components/Cursor";
 import CookieConsent from "../src/components/CookieConsent";
-import { AuthProvider } from "../src/contexts/AuthContext";
-import ProtectedRoute from "../src/components/ProtectedRoute";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,11 +46,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<any>(null);
   const pathname = usePathname();
 
-  const isDashboardOrAuth =
-    pathname.startsWith("/dashboard") ||
-    pathname.startsWith("/admin") ||
-    pathname === "/login" ||
-    pathname === "/register";
 
   useEffect(() => {
     let active = true;
@@ -124,17 +117,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     const lenis = lenisRef.current?.lenis;
     if (!lenis) return;
 
-    if (isDashboardOrAuth) {
-      lenis.start();
-      return;
-    }
-
     if (!loaderComplete || cookieConsentVisible) {
       lenis.stop();
     } else {
       lenis.start();
     }
-  }, [loaderComplete, cookieConsentVisible, isDashboardOrAuth]);
+  }, [loaderComplete, cookieConsentVisible]);
 
   useEffect(() => {
     const lenis = lenisRef.current?.lenis;
@@ -168,7 +156,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   }, [pathname]);
 
   return (
-    <AuthProvider>
+    <>
       <ReactLenis
         root
         options={{
@@ -180,27 +168,23 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       >
         <div
           className={
-            (loaderComplete && !cookieConsentVisible) || isDashboardOrAuth
+            (loaderComplete && !cookieConsentVisible)
               ? ""
               : "pointer-events-none select-none"
           }
         >
-          {!isDashboardOrAuth && <Cursor />}
-          {!isDashboardOrAuth && <NavBar />}
-          {!isDashboardOrAuth && <MusicPlayer src="/images/bg-ambient.mp3" />}
+          <Cursor />
+          <NavBar />
+          <MusicPlayer src="/images/bg-ambient.mp3" />
           <AppShellContext.Provider value={{ startHero: startHeroAnimation, loaderComplete, videoSrc }}>
             <Suspense fallback={null}>
-              {isDashboardOrAuth && (pathname !== "/login" && pathname !== "/register") ? (
-                <ProtectedRoute>{children}</ProtectedRoute>
-              ) : (
-                children
-              )}
+              {children}
             </Suspense>
           </AppShellContext.Provider>
         </div>
       </ReactLenis>
 
-      {!loaderComplete && !isDashboardOrAuth && (
+      {!loaderComplete && (
         <Loader
           isReady={appReady}
           onFadeStart={handleFadeStart}
@@ -208,12 +192,10 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         />
       )}
 
-      {!isDashboardOrAuth && (
-        <CookieConsent
-          loaderComplete={loaderComplete}
-          onVisibilityChange={setCookieConsentVisible}
-        />
-      )}
-    </AuthProvider>
+      <CookieConsent
+        loaderComplete={loaderComplete}
+        onVisibilityChange={setCookieConsentVisible}
+      />
+    </>
   );
 }

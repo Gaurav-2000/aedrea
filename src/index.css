@@ -709,7 +709,7 @@ html.reel-native .reel-morph {
   }
 
   .navbar {
-    @apply fixed w-full left-[50%] py-5 px-5 md:px-20 -translate-x-1/2 z-100 transition-all duration-300 ease-in-out;
+    @apply fixed w-full left-[50%] py-5 px-4 md:px-10 xl:px-20 -translate-x-1/2 z-100 transition-all duration-300 ease-in-out;
 
     &.scrolled {
       @apply top-0 bg-black;
@@ -731,10 +731,10 @@ html.reel-native .reel-morph {
       @apply hidden lg:flex items-center;
 
       ul {
-        @apply flex space-x-8;
+        @apply flex space-x-4 xl:space-x-8;
 
         li {
-          @apply text-white-50 relative;
+          @apply text-white-50 relative text-xs xl:text-sm tracking-wide;
 
           span {
             @apply transition-colors duration-300 hover:text-white;

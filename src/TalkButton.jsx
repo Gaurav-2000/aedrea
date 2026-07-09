@@ -5,7 +5,7 @@ import SupportButton from "./components/SupportButton";
 const VAPI_KEY = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_VAPI_KEY : "";
 const ASSISTANT_ID = typeof process !== "undefined" ? process.env.NEXT_PUBLIC_VAPI_ASSISTANT_ID : "";
 
-export default function TalkButton() {
+export default function TalkButton({ className = "relative" }) {
   const vapiRef = useRef(null);
   const [active, setActive] = useState(false);
   const glowRef = useRef(null);
@@ -43,7 +43,7 @@ export default function TalkButton() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className={className}>
       <div className="relative">
         <div
           ref={glowRef}

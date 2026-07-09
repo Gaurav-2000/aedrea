@@ -153,7 +153,10 @@ export default function Loader({
     });
 
     // Phase 2: Start revealing page content (fires onFadeStart callback)
-    exitTl.call(() => onFadeStart(), null, "+=0.05");
+    exitTl.call(() => {
+      onFadeStart();
+      gsap.set(overlay, { backgroundColor: "transparent" });
+    }, null, "+=0.05");
 
     // Phase 3: Noise dissolve — organic ink-blot dissolution
     const prog = { value: 0 };
@@ -261,6 +264,7 @@ export default function Loader({
         position: "fixed",
         inset: 0,
         zIndex: 9999,
+        backgroundColor: "#E8E4DE",
       }}
     >
       {/* Canvas — the noise dissolve is painted here */}

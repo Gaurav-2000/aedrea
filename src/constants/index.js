@@ -3,8 +3,10 @@ const navLinks = [
   { name: "AboutUs", link: "/about" },
   { name: "OurWorks", link: "/our-works" },
   { name: "Services", link: "/services" }, // ← full page navigate
+  { name: "Pricing", link: "#" },
   { name: "Seo-Checker", link: "/seo-checker" }, // ← full page navigate
   { name: "ContactUs", link: "/contact" }, // ← full page navigate
+  { name: "Login", link: "#" },
 ];
 const counterItems = [
   { value: 1, suffix: "+", label: "Years of Experience" },
@@ -924,13 +926,13 @@ const webPlans = [
     popular: false,
     ribbon: "SILVER",
     features: [
-     
+
       "Designing: 4-6 working Days",
-     
+
       "5-8 Dynamic Web Pages",
-    
+
       "On Page + Off Page + Technical SEO",
-      
+
       "Fully Responsive mobile-first Website",
       "Enquiry Form with all products catalogued",
       "Google Map integration on Contact Page",
@@ -943,7 +945,7 @@ const webPlans = [
       "Google Webmaster tool verification",
       "Free Search Engine Submission",
       "Local Google Business Listing setup",
-     
+
     ],
     cta: "Get Started",
   },
@@ -956,12 +958,12 @@ const webPlans = [
     popular: true,
     ribbon: "REGULAR",
     features: [
-      
+
       "Custom Designing: 10-12 working Days",
 
       "10-15 Dynamic Web Pages",
-    
-     "On Page + Off Page + Technical SEO",
+
+      "On Page + Off Page + Technical SEO",
 
       "Fully Responsive mobile-first Website",
       "Enquiry Form with all products catalogued",
@@ -987,7 +989,7 @@ const webPlans = [
     popular: false,
     ribbon: "PREMIUM",
     features: [
-      
+
       "Custom Designing: 15-20 working Days",
       "Individual Domain & Hosting included",
       "25-35 Dynamic Web Pages",

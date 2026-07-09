@@ -319,7 +319,7 @@ const NavBar = () => {
                         </svg>
                         <span className="underline" />
                       </Link>
-                      
+
                       {/* Apple-clean Services Dropdown */}
                       <div className="absolute top-[100%] left-1/2 -translate-x-1/2 pt-2 w-64 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-300 z-50 text-left">
                         <div className="bg-[#0d0d12]/95 border border-[#1a1a24] backdrop-blur-xl rounded-xl p-2 shadow-2xl space-y-0.5">
@@ -561,7 +561,7 @@ const NavBar = () => {
           position: relative;
           color: #000;
           font-weight: 600;
-          font-size: clamp(2.8rem, 11vw, 4rem);
+          font-size: clamp(2.0rem, 10vw, 4rem);
           cursor: pointer;
           line-height: 1;
           letter-spacing: -2px;

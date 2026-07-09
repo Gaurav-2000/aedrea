@@ -1980,8 +1980,12 @@ html.reel-native .reel-morph {
 input:focus,
 textarea:focus,
 select:focus,
+button:focus,
+a:focus,
 input:focus-visible,
 textarea:focus-visible,
-select:focus-visible {
+select:focus-visible,
+button:focus-visible,
+a:focus-visible {
   outline: none !important;
 }

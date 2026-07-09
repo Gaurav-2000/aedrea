@@ -599,7 +599,7 @@ export default function AutomationService() {
             </div>
             {/* Floating badge */}
             <div
-              className="absolute -bottom-4 -right-4 lg:right-auto lg:-left-4 z-20 bg-[white] text-white text-[0.68rem] font-bold tracking-widest px-4 py-2.5 rounded-xl shadow-lg"
+              className="absolute -bottom-4 -right-4 lg:right-auto lg:-left-4 z-20 bg-[white] text-black text-[0.68rem] font-bold tracking-widest px-4 py-2.5 rounded-xl shadow-lg"
               style={{ fontFamily: "'Syne', sans-serif" }}
             >
               ★ DELHI NCR'S #1

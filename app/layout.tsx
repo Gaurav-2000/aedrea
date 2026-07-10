@@ -101,7 +101,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -126,7 +126,7 @@ export default function RootLayout({
         <link rel="preload" href="/videos/hero-video.mp4" as="video" type="video/mp4" />
         <link rel="preload" href="/images/hero-poster.webp" as="image" type="image/webp" />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <AppShell>{children}</AppShell>
       </body>
     </html>
